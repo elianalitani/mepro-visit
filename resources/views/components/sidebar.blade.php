@@ -7,26 +7,26 @@
 </head>
 <body class="min-h-screen">
     <!--begin::Button toggle-->
-    <div class="bg-white w-fit p-3 h-screen text-[#029C558C] font-bold">    
-        <button data-drawer-target="drawer-sidebar" data-drawer-toggle="drawer-sidebar">
+    <aside id="drawer-sidebar-close" class="bg-white top-0 w-fit p-3 min-h-screen text-[#029C558C] font-bold hidden">    
+        <button id="toggle-sidebar">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
             <path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
             </svg>
         </button>
-    </div>
+    </aside>
     <!--end::Button toggle-->
 
     <!--begin::Sidebar background-->
-    <div id="drawer-sidebar" class="w-64 h-screen transition-all duration-300 bg-white" tabindex="-1" aria-labelledby="drawer-label">    
+    <aside id="drawer-sidebar" class="bg-white top-0 w-fit min-h-screen transition-transform transform duration-300" tabindex="-1" aria-labelledby="drawer-label">    
         <!--begin::Header with logo-->
         <div class="p-3 my-3 flex justify-center">
-            <img src="{{ asset('assets/images/logo-green.png') }}" alt="Logo MeproVisit" class="w-40 h-auto">
+            <img id="close-sidebar" src="{{ asset('assets/images/logo-green.png') }}" alt="Logo MeproVisit" class="w-40 h-auto">
         </div>
         <!--end::Header with logo-->
         <!--begin::Menu item-->
-        <div class="flex flex-col h-full justify-between w-full">
+        <div id="main-content" class="flex flex-col justify-between">
             <div class="m-3 items-center w-full">
-                <ul class="h-full w-full justify-center">
+                <ul class="justify-center">
                     <li>
                         <a class="flex items-center m-3 p-2.5 gap-3 text-[#908787] font-bold rounded-2xl transition duration-300 ease-in-out hover:bg-[#029C558C] hover:text-[#01562f]">
                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -66,7 +66,7 @@
             </div>
         </div>
         <!--end::Menu item-->
-    </div>
+    </aside>
     <!--end::Sidebar background-->
 </body>
 </html>

@@ -7,7 +7,7 @@
 </head>
 <body class="min-h-screen">
     <!--begin::Header-->
-    <div class="bg-white w-fit p-3 w-screen grid grid-cols-3 gap-5 items-center">    
+    <div class="bg-white p-3 max-w-screen grid grid-cols-3 gap-5 items-center">    
         <div class="flex flex-col font-bold text-lg">Dashboard</div>
         
         <!--begin::Search bar-->

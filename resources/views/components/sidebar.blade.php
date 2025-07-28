@@ -17,14 +17,14 @@
     <!--end::Button toggle-->
 
     <!--begin::Sidebar background-->
-    <aside id="drawer-sidebar" class="bg-white top-0 w-fit min-h-screen transition-transform transform duration-300" tabindex="-1" aria-labelledby="drawer-label">    
+    <aside id="drawer-sidebar" class="flex flex-col bg-white top-0 w-fit min-h-screen transition-transform transform duration-300" tabindex="-1" aria-labelledby="drawer-label">    
         <!--begin::Header with logo-->
         <div class="p-3 my-3 flex justify-center">
             <img id="close-sidebar" src="{{ asset('assets/images/logo-green.png') }}" alt="Logo MeproVisit" class="w-40 h-auto">
         </div>
         <!--end::Header with logo-->
         <!--begin::Menu item-->
-        <div id="main-content" class="flex flex-col justify-between">
+        <div id="main-content" class="justify-between">
             <div class="m-3 items-center w-full">
                 <ul class="justify-center">
                     <li>
@@ -37,7 +37,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="flex items-center m-3 p-2.5 gap-3 text-[#908787] font-bold rounded-2xl transition duration-300 ease-in-out hover:bg-[#029C558C] hover:text-[#01562f]">
+                        <a href="/daftar-kunjungan" class="flex items-center m-3 p-2.5 gap-3 text-[#908787] font-bold rounded-2xl transition duration-300 ease-in-out hover:bg-[#029C558C] hover:text-[#01562f]">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                                 <path fill-rule="evenodd" d="M3 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5H15v-18a.75.75 0 0 0 0-1.5H3ZM6.75 19.5v-2.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 0 1.5h-.75A.75.75 0 0 1 6 6.75ZM6.75 9a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM6 12.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 6a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75A.75.75 0 0 1 10.5 9h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 12a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM16.5 6.75v15h5.25a.75.75 0 0 0 0-1.5H21v-12a.75.75 0 0 0 0-1.5h-4.5Zm1.5 4.5a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Zm.75 2.25a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75h-.008ZM18 17.25a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd" />
                             </svg>
@@ -53,8 +53,8 @@
                         </a>
                     </li>
                     <!--begin::Button logout-->
-                    <li class="mt-60">
-                        <a class="flex justify-center items-center m-3 p-2 gap-2 w-40 rounded-xl border-1 border-[#E21B1B] text-gray-500">
+                    <li class="mt-auto">
+                        <a class="flex justify-center items-center m-3 p-2 gap-2 w-40 rounded-xl border-1 border-[#E21B1B70] text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
                                 <path fill-rule="evenodd" d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd" />
                             </svg>    
@@ -68,5 +68,29 @@
         <!--end::Menu item-->
     </aside>
     <!--end::Sidebar background-->
+    
+    <script>
+        const sidebar = document.getElementById("drawer-sidebar"); // sidebar utama
+        const sidebarClose = document.getElementById("drawer-sidebar-close") // sidebar yang muncul ketika sidebar utama ditutup
+        const mainContent = document.getElementById("main-content"); // isi sidebar
+        const toggleButton = document.getElementById("toggle-sidebar"); // icon hamburger, untuk membuka sidebar
+        const closeSidebarBtn = document.getElementById("close-sidebar"); // logo, untuk menutup sidebar
+
+        // Untuk membuka sidebar
+        toggleButton.addEventListener("click", () => {
+            sidebar.classList.remove("hidden");
+            sidebar.classList.remove("-translate-x-full");
+            sidebarClose.classList.add("hidden");
+            sidebarClose.classList.add("translate-x-full");
+        });
+
+        // Untuk menutup sidebar
+        closeSidebarBtn.addEventListener("click", () => {
+            sidebar.classList.add("-translate-x-full");
+            sidebar.classList.add("hidden")
+            sidebarClose.classList.remove("hidden")
+            sidebarClose.classList.remove("translate-x-full");
+        });
+    </script>
 </body>
 </html>

@@ -11,5 +11,9 @@ Route::get('/test', function () {
 });
 
 Route::get('/admin', function () {
-    return view('guest/dashboard');
+    return view('admin/dashboard');
+});
+
+Route::get('/daftar-kunjungan', function () {
+    return view('admin/daftarKunjungan');
 });

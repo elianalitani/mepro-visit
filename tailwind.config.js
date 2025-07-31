@@ -9,7 +9,11 @@ export default {
     join(__dirname, './node_modules/tw-elements/dist/js/**/*.js'),
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        nunito: ['"Nunito"', 'sans-serif'],
+      }
+    },
   },
   plugins: [require('tw-elements/dist/plugin')],
 };

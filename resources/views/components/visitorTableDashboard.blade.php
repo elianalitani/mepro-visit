@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tailwind Test</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="min-h-screen">
 <!--begin::Tabel kunjungan-->
 <div class="bg-white h-fit rounded-xl gap-3 mt-10 overflow-auto shadow-sm p-4">
     <!--begin::Header-->    
@@ -15,7 +7,7 @@
     </div>
     <!--end::Header-->
     <!--begin::Table-->
-    <table id="tableKunjungan" class="table-auto w-full">
+    <table id="tableKunjungan" class="table-auto w-full text-sm">
         <thead>
             <tr class="text-gray-500 text-center">
                 <th>Nama Tamu</th>
@@ -60,7 +52,5 @@
             </tbody>
         </table>
         <!--end::Table-->
-        </div>
-        <!--end::Tabel kunjungan-->
-</body>
-</html>
+</div>
+<!--end::Tabel kunjungan-->

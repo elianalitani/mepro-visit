@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import 'tailwindcss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -6,6 +11,60 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji'; */
+    --font-nunito: 'Nunito', sans-serif;
+}
+
+@layer base{
+    body {
+        @apply font-nunito;
+    }
+}
+
+/* Styling datepicker */
+.datepicker-picker, .prev-btn, .next-btn, .view-switch{
+  background-color: white !important;
+  color: black !important;
+}
+
+.datepicker .datepicker-cell,
+.datepicker .datepicker-header,
+.datepicker .datepicker-footer {
+  background-color: white !important;
+  color: black !important;
+}
+
+.datepicker .datepicker-cell:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.datepicker .datepicker-cell.selected {
+  background-color: #E8F5EC !important;
+  color: black !important;
+}
+
+.datepicker svg{
+    color: #029c55
+}
+
+/* Tanggal dalam bulan aktif */
+.datepicker-cell:not(.opacity-50) {
+  color: #000 !important; /* Hitam */
+}
+
+/* Tanggal dari bulan lain (biasanya diberi opacity-50 oleh Flowbite) */
+.datepicker-cell.opacity-50 {
+  color: #9ca3af !important; /* Tailwind gray-400 */
+}
+
+.today-btn{
+    background-color: #029c55;
+    color: #ffffff;  
+}
+
+.clear-btn{
+    background-color: #80808050;
+    color: #000000;
+    border: none;
 }

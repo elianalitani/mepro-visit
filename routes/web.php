@@ -17,3 +17,11 @@ Route::get('/admin', function () {
 Route::get('/daftar-kunjungan', function () {
     return view('admin/daftarKunjungan');
 });
+
+Route::get('/form-kunjungan', function () {
+    return view('admin/formKunjungan');
+});
+
+Route::get('/detail-kunjungan', function () {
+    return view('admin/detailKunjungan');
+});

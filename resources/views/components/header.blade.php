@@ -7,7 +7,7 @@
 </head>
 <body class="min-h-screen">
     <!--begin::Header-->
-    <div class="flex bg-white p-3 max-w-screen grid grid-cols-3 gap-5 items-center">    
+    <div class="gap-5 p-3 max-w-screen items-center grid grid-cols-4 bg-white">    
         <div class="font-bold text-lg">Dashboard</div>
         
         <!--begin::Search bar-->
@@ -21,22 +21,22 @@
         </div>
         <!--end::Search bar-->
         
-        <!--begin::Account-->
-        <div class="grid grid-cols-3 items-center gap-2 relative">
-            <!--begin::Notification-->
-            <div class="flex flex-col items-end">
-                <div class="rounded-sm bg-gray-100 p-2 w-fit">
-                    <button id="notifButton" onclick="toggleNotif()" class="relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-                        </svg>
-                    </button>
-                </div>
+        <!--begin::Notification-->
+        <div class="flex flex-col items-end">
+            <div class="relative rounded-sm bg-gray-100 p-2 w-fit">
+                <button id="notifButton" onclick="toggleNotif()" class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                    </svg>
+                </button>
+                
+                @include('components.notifications')
             </div>
-            <!--end::Notification-->
-            
-            @include('components.notifications')
-            
+        </div>
+        <!--end::Notification-->
+        
+        <!--begin::Account-->
+        <div class="grid grid-cols-2 items-center gap-2 relative">
             <!--begin::Profile picture-->
             <div class="flex flex-col items-end">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-10">

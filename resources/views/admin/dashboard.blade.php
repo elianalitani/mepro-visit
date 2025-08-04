@@ -19,9 +19,29 @@
             <main class="p-4 gap-4 m-3">
                 <div class="w-full max-w-screen-xl mx-auto">
                     <div class="flex flex-wrap justify-between">
-                        <!--begin::Overview-->
+                    <!--begin::Overview-->
                         <div class="flex flex-col">
-                            <span class="text-xl font-bold">Overview</span>
+                            <span class="text-xl font-bold">Daftar Kunjungan</span>
+                            
+                            <!--begin::Breadcrumbs-->
+                            <nav class="flex" aria-label="Breadcrumb">
+                                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:[space-x-reverse]">
+                                    <li class="inline-flex items-center">
+                                        <a href="/admin" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <li aria-current="page">
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m9 20.247 6-16.5" />
+                                            </svg>
+                                            <span class="ms-1 md:ms-2 text-sm text-gray-500 font-medium hover:text-[#029C55]">Daftar Kunjungan</span>
+                                        </div>  
+                                    </li>
+                                </ol>
+                            </nav>
+                            <!--end::Breadcrumbs-->
                         </div>
                         <!--end::Overview-->
                         

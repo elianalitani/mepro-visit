@@ -1,8 +1,6 @@
-    <div class="absolute right-40 mt-50 w-80 hidden z-50 shadow-md" id="notifDropdown">
+    <div class="absolute top-full right-0 w-80 hidden z-20 shadow-md" id="notifDropdown">
         <!--begin::Header-->
-        <div class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-green-600 mx-auto -mt-2">
-
-        </div>
+        <div class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-green-600 mx-auto -mt-2"></div>
         <div class="bg-[#029C55] p-1 text-white font-bold text-center">    
             Notifikasi
         </div>

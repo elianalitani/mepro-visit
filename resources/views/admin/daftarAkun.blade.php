@@ -21,13 +21,12 @@
                     <div class="flex flex-wrap justify-between">
                         <!--begin::Overview-->
                         <div class="flex flex-col">
-                            <span class="text-xl font-bold">Daftar Kunjungan</span>
-                            
+                            <span class="text-xl font-bold">Daftar Akun</span>
                             <!--begin::Breadcrumbs-->
                             <nav class="flex" aria-label="Breadcrumb">
-                                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:[space-x-reverse]">
+                                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse]">
                                     <li class="inline-flex items-center">
-                                        <a href="/admin" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
+                                        <a href="/admin" class="inline-flex items-center text-sm text-[#029C55] underline font-medium hover:text-[#029c5550]">
                                             Dashboard
                                         </a>
                                     </li>
@@ -36,7 +35,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m9 20.247 6-16.5" />
                                             </svg>
-                                            <span class="ms-1 md:ms-2 text-sm text-gray-500 font-medium hover:text-[#029C55]">Daftar Kunjungan</span>
+                                            <span class="ms-1 md:ms-2 text-sm text-gray-500 font-medium hover:text-[#029C55]">Daftar Akun</span>
                                         </div>  
                                     </li>
                                 </ol>
@@ -46,12 +45,12 @@
                         <!--end::Overview-->
                         
                         <!--begin::Options-->
-                        <div class="flex flex-wrap gap-3 justify-center items-center">
+                        <div class="flex flex-wrap justify-center items-center gap-3">
                             <!--begin::Entry dropdown -->
-                            <div class="flex gap-2 items-center text-sm">
+                            <div class="flex items-center gap-2 text-sm">
                                 <span>Showing</span>
 
-                                <button id="dropdownEntriesButton" data-dropdown-toggle="dropdownEntriesMenu" class="flex px-2 py-1 justify-center items-center bg-[#029C5560] rounded-sm cursor-pointer" type="button">
+                                <button id="dropdownEntriesButton" data-dropdown-toggle="dropdownEntriesMenu" class="flex bg-[#029C5560] rounded-sm px-2 py-1 justify-center items-center" type="button">
                                     <span id="selectedEntries">10</span>
                                     <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -68,42 +67,28 @@
                                 </div>
                             </div>
                             <!--end::Entry dropdown-->
-                            
-                            <!--begin::Filter button-->
-                            <button id="filterButton" onclick="toggleFilter()" class="relative">
-                                <div class="flex gap-2 px-2 py-1 justify-center items-center bg-white rounded-sm font-bold cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
-                                    </svg>
-                                    Filter
-                                </div>
-                            </button>
-                            
-                            @include('components.filter')
-                            <!--end::Filter button-->
-                            
+
                             <!--begin::Export button-->
-                            <div class="flex gap-2 px-2 py-1 justify-center items-center bg-white rounded-sm font-bold cursor-pointer">
+                            <div class="flex px-2 py-1 bg-white rounded-sm gap-2 items-center justify-center font-bold cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                 </svg>
                                 Unggah
                             </div>
                             <!--end::Export button-->
-                            
                             <!--begin::Tambah kunjungan baru-->
-                            <a href="/admin/form-kunjungan" class="flex gap-2 px-2 py-1 justify-center items-center bg-[#029C55] rounded-sm text-white font-bold cursor-pointer">
+                            <a href="/admin/form-akun" class="flex gap-2 px-2 py-1 justify-center items-center bg-[#029C55] rounded-sm text-white font-bold cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
-                                Tambah Kunjungan Baru
+                                Tambah Akun Baru
                             </a>
                             <!--end::Tambah kunjungan baru-->
                         </div>
                         <!--end::Options-->
                     </div>
                     
-                    @include('components.visitorTableList')
+                    @include('components.accountTableList')
                 </div>
             </main>
         </div>
@@ -206,13 +191,13 @@
         const pagination = document.querySelector('.dataTables_paginate');
         if (!pagination) return;
 
-        pagination.classList.add('flex', 'gap-2', 'mt-5', 'justify-between', 'items-center', 'text-sm', 'cursor-pointer');
+        pagination.classList.add('flex', 'gap-2', 'mt-5', 'justify-between', 'items-center', 'text-sm');
 
         const pageLinks = pagination.querySelectorAll('a');
         pageLinks.forEach(link => {
             link.classList.add(
                 'px-3', 'py-1', 'rounded-md', 'hover:bg-[#E8F5EC]',
-                'text-gray-700', 'transition', 'duration-200', 'cursor-pointer'
+                'text-gray-700', 'transition', 'duration-200'
             );
         });
 
@@ -237,8 +222,9 @@
         const select = wrapper.querySelector('select');
         if (select) {
             select.classList.add(
-                'py-1.5', 'px-3', 'border', 'border-gray-300', 'rounded-md',
-                'text-sm', 'text-green-700', 'focus:outline-none', 'focus:ring-2', 'focus:ring-[#029c55]-500'
+                'border', 'border-gray-300', 'rounded-md',
+                'py-1.5', 'px-3', 'text-sm', 'text-green-700',
+                'focus:outline-none', 'focus:ring-2', 'focus:ring-emerald-500'
             );
         }
     }, 0);

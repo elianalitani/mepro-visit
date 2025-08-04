@@ -1,9 +1,8 @@
-<!--begin::Tabel kunjungan-->
-<div class="bg-white h-fit rounded-xl gap-3 mt-10 overflow-auto shadow-sm p-4">
+<div class="h-fit w-full gap-3 p-4 mt-10 overflow-auto bg-white rounded-xl shadow-sm">
     <!--begin::Header-->    
-    <div class="flex flex-row justify-between p-4">
+    <div class="flex flex-row p-4 justify-between">
         <span class="text-2xl font-bold">Kunjungan Terakhir</span>
-            <a class="text-sm text-blue-500 hover:underline" href="#">View all</a>
+            <a class="text-sm text-blue-500 hover:underline" href="/daftar-kunjungan">View all</a>
     </div>
     <!--end::Header-->
     <!--begin::Table-->
@@ -18,7 +17,7 @@
                 <th>Status</th>
             </tr>
         </thead>
-            <tbody class="text-left">
+            <tbody class="text-left font-bold">
                 <tr class="bg-white border-b border-[#029C5525]">
                     <td class="px-4 py-3">Maitsa Luthfiyyah</td>
                     <td class="px-4 py-3">Telkom University</td>
@@ -26,7 +25,7 @@
                     <td class="px-4 py-3">Ian Mariana Wati</td>
                     <td class="px-4 py-3">MIS</td>
                     <td class="px-4 py-3">
-                        <div class="p-1 rounded-full border border-[#fad230] text-[#fad230] text-center font-medium">Menunggu</div>        
+                        <div class="p-1 border border-[#fad230] rounded-full text-[#fad230] text-center font-medium">Menunggu</div>        
                     </td>
                 </tr>
                 <tr class="bg-white border-b border-[#029C5525]">
@@ -36,7 +35,7 @@
                     <td class="px-4 py-3">Bambang Heru Nugroho</td>
                     <td class="px-4 py-3">MIS</td>
                     <td class="px-4 py-3">
-                        <div class="p-1 rounded-full border border-[#fad230] text-[#fad230] text-center font-medium">Menunggu</div>        
+                        <div class="p-1 border border-[#fad230] rounded-full text-[#fad230] text-center font-medium">Menunggu</div>        
                     </td>
                 </tr>
                 <tr class="bg-white border-b border-[#029C5525]">
@@ -46,11 +45,10 @@
                     <td class="px-4 py-3">Ian Mariana Wati</td>
                     <td class="px-4 py-3">MIS</td>
                     <td class="px-4 py-3">
-                        <div class="p-1 rounded-full border border-[#fad230] text-[#fad230] text-center font-medium">Menunggu</div>        
+                        <div class="p-1 border border-[#fad230] rounded-full text-[#fad230] text-center font-medium">Menunggu</div>        
                     </td>
                 </tr>
             </tbody>
         </table>
         <!--end::Table-->
 </div>
-<!--end::Tabel kunjungan-->

@@ -28,7 +28,7 @@
                             <nav class="flex" aria-label="Breadcrumb">
                                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse]">
                                     <li class="inline-flex items-center">
-                                        <a href="/admin" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
+                                        <a href="/satpam" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
                                             Dashboard
                                         </a>
                                     </li>
@@ -37,7 +37,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m9 20.247 6-16.5" />
                                             </svg>
-                                            <a href="/admin/daftar-kunjungan" class="inline-flex items-center text-sm text-[#029C55] underline font-medium hover:text-[#029c5550]">
+                                            <a href="/satpam/daftar-kunjungan" class="inline-flex items-center text-sm text-[#029C55] underline font-medium hover:text-[#029c5550]">
                                                 Daftar Kunjungan
                                             </a>
                                         </div>  

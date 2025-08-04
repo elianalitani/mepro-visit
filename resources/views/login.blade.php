@@ -6,7 +6,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gradient-to-r from-[#029C55] to-[#34C88AB2] min-h-screen w-full overflow-hidden">
-    <div class="grid grid-cols-2 gap-4 mx-20">
+    
+    @include('components.loading')
+    
+    <div class="main-container grid grid-cols-2 gap-4 mx-20">
         <!--begin::Kontainer kiri-->
         <div class="container p-4 flex flex-col items-start justify-center gap-5">
             <img src="{{ asset('assets/images/logo-white.png') }}" alt="Logo MeproVisit" class="w-30 h-auto">
@@ -80,5 +83,14 @@
         </div>
         <!--end::Kontainer kanan-->
     </div>
+    
+<script>
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loading-screen');
+    const content = document.getElementById('main-container');
+    loader.style.display = 'none';
+    content.classList.remove('hidden');
+  });
+</script>
 </body>
 </html>

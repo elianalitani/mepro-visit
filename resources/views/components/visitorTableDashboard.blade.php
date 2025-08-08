@@ -1,7 +1,10 @@
-<div class="h-fit w-full gap-3 p-4 mt-10 overflow-auto bg-white rounded-xl shadow-sm">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
+</head>
+<div class="h-fit w-full gap-3 p-2 sm:p-4 mt-10 overflow-auto bg-white rounded-xl shadow-sm">
     <!--begin::Header-->    
     <div class="flex flex-row p-4 justify-between">
-        <span class="text-2xl font-bold">Kunjungan Terakhir</span>
+        <span class="text-sm sm:text-2xl font-bold">Kunjungan Terakhir</span>
             <a class="text-sm text-blue-500 hover:underline" href="/daftar-kunjungan">View all</a>
     </div>
     <!--end::Header-->

@@ -21,14 +21,14 @@
                     <div class="flex flex-wrap justify-between">
                         <!--begin::Overview-->
                         <div class="flex flex-col">
-                            <span class="text-xl font-bold">Overview</span>
+                            <span class="text-xl font-bold">Overview Satpam</span>
                         </div>
                         <!--end::Overview-->
                         
                         <!---begin::Statistik-->
-                        <div class="flex flex-row w-full gap-3 mt-10 justify-between cursor-default">
+                        <div class="flex flex-row w-full gap-3 mt-10 justify-between cursor-default overflow-y-auto">
                             <!--begin::Kunjungan selesai-->
-                            <div class="flex flex-col w-64 gap-2 p-5 justify-around bg-white rounded-lg shadow-sm">
+                            <div class="flex flex-col w-full gap-2 p-5 justify-around bg-white rounded-lg shadow-sm">
                                 <div class="flex flex-row gap-2 items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#59d257" class="p-1 bg-[#e8fbe8] rounded-full size-8">
                                         <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
@@ -44,7 +44,7 @@
                             </div>
                             <!--end::Kunjungan selesai-->
                             <!--begin::Kunjungan menunggu-->
-                            <div class="flex flex-col w-64 gap-2 p-5 justify-around bg-white rounded-lg shadow-sm">
+                            <div class="flex flex-col w-full gap-2 p-5 justify-around bg-white rounded-lg shadow-sm">
                                 <div class="flex flex-row gap-2 items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fad230" class="p-1 bg-[#fbfbe8] rounded-full size-8">
                                         <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" />
@@ -60,7 +60,7 @@
                             </div>
                             <!--end::Kunjungan menunggu-->
                             <!--begin::Kunjungan sedang berlangsung-->
-                            <div class="flex flex-col w-64 gap-2 p-5 justify-around bg-white rounded-lg shadow-sm">
+                            <div class="flex flex-col w-full gap-2 p-5 justify-around bg-white rounded-lg shadow-sm">
                                 <div class="flex flex-row gap-2 items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3171da" class="p-1 bg-[#e9e8fb] rounded-full size-8">
                                         <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
@@ -76,7 +76,7 @@
                             </div>
                             <!--end::Kunjungan sedang berlangsung-->
                             <!--begin::Kunjungan dibatalkan-->
-                            <div class="flex flex-col w-64 gap-2 p-5 justify-around bg-white rounded-lg shadow-sm">
+                            <div class="flex flex-col w-full gap-2 p-5 justify-around bg-white rounded-lg shadow-sm">
                                 <div class="flex flex-row gap-2 items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#e21b1b" class="p-1 bg-[#fbe8e8] rounded-full size-8">
                                         <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd" />
@@ -95,12 +95,13 @@
                         <!---end::Statistik-->
                         
                         <!--begin::Grafik dan top kunjungan-->
-                        <div class="flex flex-row gap-3">
+                        <div class="flex flex-col md:flex-row gap-3">
                             <!--begin::Grafik-->
-                            <div class="flex-[2] w-full min-w-0 overflow-auto p-4 mt-10 bg-white rounded-xl shadow-sm ">
+                            <span class="flex-wrap w-screen mt-10 text-md font-bold cursor-default block sm:hidden">Kunjungan PT Meprofarm Pharmaceutical Industries | <span>2024</span></span>
+                            <div class="flex-[2] w-screen sm:w-full h-[100px] sm:h-fit min-w-0 overflow-auto p-4 mt-2 sm:mt-10 bg-white rounded-xl shadow-sm ">
                                 <!--begin::Header-->    
                                 <div class="flex flex-row p-4 justify-between">
-                                    <span class="text-md font-bold cursor-default">Kunjungan PT Meprofarm Pharmaceutical Industries | <span>2024</span></span>
+                                    <span class="flex-wrap text-md font-bold cursor-default hidden sm:block">Kunjungan PT Meprofarm Pharmaceutical Industries | <span>2024</span></span>
 
                                     <!--begin::Dropdown tahun-->
                                     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownTahun" class="flex px-3 justify-center items-center bg-[#eefbe8] rounded-full cursor-pointer" type="button">
@@ -135,14 +136,14 @@
                             <!--end::Grafik-->
                             
                             <!--begin::Top kunjungan-->
-                            <div class="flex-[1] w-full min-w-0 h-fit mt-10 overflow-hidden p-4 bg-white rounded-xl shadow-sm cursor-default">
+                            <div class="flex-[1] w-screen sm:w-full min-w-0 h-fit mt-10 overflow-hidden p-4 bg-white rounded-xl shadow-sm cursor-default">
                                 <!--begin::Header-->    
                                 <div class="flex flex-row p-4 justify-between">
                                     <span class="text-md font-bold">Top 10 Kunjungan</span>
                                 </div>
                                 <!--end::Header--> 
                                 <!--begin::Table-->
-                                <table class="table-auto w-full">
+                                <table class="table-auto w-full text-sm sm:text-base">
                                     <thead>
                                         <tr class="border-b border-[#029C5525] text-gray-500 text-center">
                                             <th>Rank</th>

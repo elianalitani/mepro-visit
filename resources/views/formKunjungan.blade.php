@@ -2,24 +2,27 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
-    <title>Tailwind Test</title>
+    <title>Mepro Visit</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <link href="https://unpkg.com/flowbite@latest/dist/flowbite.min.css" />
 </head>
 <body class="min-h-screen bg-[#E8F5EC] overflow-x-hidden">
+    <!--begin::Loading-->
+    <div id="loadingOverlay" class="hidden fixed inset-0 flex z-99 w-screen justify-center items-center">
+        @include('components.loading')
+    </div>
+    <!--end::Loading-->
     <div id="layout" class="flex">
         @include('components.sidebar')
 
         <div class="flex flex-col flex-1">
             @include('components.header')
 
-            <main class="p-4 gap-4 m-3">
+            <main id="main" class="p-4 gap-4 m-3 transition-all duration-300">
                 <div class="w-full max-w-screen-xl mx-auto">
-                    <div class="flex flex-">
+                    <div class="flex">
                         <!--begin::Overview-->
                         <div class="flex flex-col">
                             <span class="text-xl font-bold">Form Kunjungan</span>
@@ -28,7 +31,7 @@
                             <nav class="flex" aria-label="Breadcrumb">
                                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse]">
                                     <li class="inline-flex items-center">
-                                        <a href="/admin" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
+                                        <a href="{{ route('dashboard') }}" class="inline-flex items-center text-xs sm:text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
                                             Dashboard
                                         </a>
                                     </li>
@@ -37,7 +40,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m9 20.247 6-16.5" />
                                             </svg>
-                                            <a href="/admin/daftar-kunjungan" class="inline-flex items-center text-sm text-[#029C55] underline font-medium hover:text-[#029c5550]">
+                                            <a href="{{ route('kunjungan.index') }}" class="inline-flex items-center text-xs sm:text-sm text-[#029C55] underline font-medium whitespace-nowrap hover:text-[#029c5550]">
                                                 Daftar Kunjungan
                                             </a>
                                         </div>  
@@ -47,7 +50,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m9 20.247 6-16.5" />
                                             </svg>
-                                            <span class="ms-1 md:ms-2 text-sm text-gray-500 font-medium hover:text-[#029C55]">Form Kunjungan</span>
+                                            <span class="ms-1 md:ms-2 text-xs sm:text-sm text-gray-500 font-medium whitespace-nowrap hover:text-[#029C55]">Form Kunjungan</span>
                                         </div>  
                                     </li>
                                 </ol>
@@ -114,11 +117,11 @@
                                 <label for="waktuKedatangan" class="block mb-2 text-sm text-gray-900 font-medium">Waktu Kedatangan <span class="text-xs text-[#e21b1b]">*</span></label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
                                         </svg>
                                     </div>
-                                    <input type="time" id="time" class="block w-full ps-10 p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" min="09:00" max="18:00" value="00:00" required />
+                                    <input type="time" id="time" class="block w-full ps-10 p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-500" min="09:00" max="18:00" value="00:00" required />
                                 </div>
                             </div>
                             <!--end::Waktu kedatangan-->
@@ -248,11 +251,11 @@
                                 <label for="waktuKepulangan" class="block mb-2 text-sm text-gray-900 font-medium">Waktu Kepulangan <span class="text-xs text-[#e21b1b]">*</span></label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
                                         </svg>
                                     </div>
-                                    <input type="time" id="time" class="block w-full ps-10 p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" min="09:00" max="18:00" value="00:00" required />
+                                    <input type="time" id="time" class="block w-full ps-10 p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-500" min="09:00" max="18:00" value="00:00" required />
                                 </div>
                             </div>
                             <!--end::Waktu kepulangan-->
@@ -270,22 +273,17 @@
             </main>
         </div>
     </div>
-
-<script>
-    // Inisialisasi DataTables
-        var visitorTable = $('#tableKunjungan').DataTable({
-            "aaSorting": [],
-            "paging": false,
-            "searching": false,
-            "info": false,
-            "ordering": false
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            document.querySelectorAll("a").forEach(function (link){
+                link.addEventListener("click", function(e){
+                    if(link.getAttribute("href") && link.getAttribute("href").charAt(0) !== "#"){
+                        document.getElementById("loadingOverlay").classList.remove("hidden");
+                    }
+                })
+            })
         });
-
-        // Hubungkan input pencarian ke DataTables
-        $('#searchKunjungan').on('keyup', function () {
-            visitorTable.search(this.value).draw();
-        });
-</script>
-
+    </script>
 </body>
 </html>

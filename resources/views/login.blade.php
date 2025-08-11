@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Tailwind Test</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mepro Visit</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gradient-to-r from-[#029C55] to-[#34C88AB2] min-h-screen w-full overflow-hidden">
+<body class="bg-white sm:bg-gradient-to-r sm:from-[#029C55] sm:to-[#34C88AB2] min-h-screen w-full overflow-hidden">
     <div class="main-container grid grid-cols-1 md:grid-cols-2 gap-4 mx-4 md:mx-10">
         <!--begin::Kontainer kiri-->
-        <div class="container flex flex-col gap-5 p-4 justify-center items-start">
-            <img src="{{ asset('assets/images/logo-white.png') }}" alt="Logo MeproVisit" class="w-24 md:w-30 h-auto">
-            <div class="text-3xl sm:text-5xl text-white font-medium">Hey, Hello!</div>
-            <div class="text-lg md:text-md text-white font-regular">Monitor visitor flow with ease. Seamless check in, better control.</div>
-            <div class="text-[#ffffff90] font-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        <div class="container flex flex-col gap-5 p-4 justify-center items-center sm:items-start">
+            <img src="{{ asset('assets/images/logo-white.png') }}" alt="Logo MeproVisit" class="w-24 md:w-30 h-auto hidden sm:block">
+            <div class="text-3xl sm:text-5xl text-white font-medium hidden sm:block">Hey, Hello!</div>
+            <div class="text-lg md:text-md text-white font-regular hidden sm:block">Monitor visitor flow with ease. Seamless check in, better control.</div>
+            <div class="text-[#ffffff90] font-light hidden sm:block">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
         </div>
         <!--end::Kontainer kiri-->
+        
         <!--begin::Kontainer kanan-->
         <div class="container md:h-screen flex flex-col justify-end items-center text-center">
-            <div class="bg-white flex flex-col rounded-t-3xl p-10 w-100 h-120">
-                <p class="text-lg font-bold">Welcome Back!</p>
-                <p class="mb-10 text-sm color-[#00000050]">Let's get started with your account</p>
+        <img src="{{ asset('assets/images/logo-green.png') }}" alt="Logo MeproVisit" class="w-32 md:w-30 h-auto mt-auto justify-center items-center block sm:hidden">
+            <div class="flex flex-col p-16 sm:w-100 h-120 w-full max-w-md mx-auto bg-white rounded-t-3xl">
+                <p class="text-lg font-bold hidden sm:block">Welcome Back!</p>
+                <p class="mb-8 text-left text-md sm:text-lg font-bold block sm:hidden">Log in to your account</p>
+                <p class="mb-10 text-sm color-[#00000050] hidden sm:block">Let's get started with your account</p>
+
                 <!--begin::Form login-->
-                <form>
+                <form method="POST" action="/login">
+                    @csrf
                     <!--begin::Username-->
                     <div class="relative mb-5">
                         <input
                             type="text"
                             id="username"
+                            name="username"
                             placeholder="Username"
                             required
                             class="peer w-full px-4 py-2 border-1 border-gray-400 text-black placeholder-transparent rounded-full focus:outline-none focus:border-[#029C55]"
@@ -46,6 +52,7 @@
                         <input
                             type="password"
                             id="password"
+                            name="password"
                             placeholder="Password"
                             required
                             class="peer w-full px-4 py-2 border-1 border-gray-400 text-black placeholder-transparent rounded-full focus:outline-none focus:border-[#029C55]"
@@ -62,17 +69,19 @@
                     <!--end::Password-->
                     <!--begin::Checkbox-->
                     <div class="flex items-center justify-center mb-5">
-                        <input type="checkbox" id="logged-in" class="w-4 h-4 border-gray-300 rounded-none" required />
-                        <label class="text-sm ml-3 text-[#00000070]">Keep me logged in</label>
+                        <input type="checkbox" id="logged-in" class="w-4 h-4 border-gray-300 rounded-none" />
+                        <label class="text-sm ml-3 text-[#00000070]">Remember me</label>
                     </div>
                     <!--end::Checkbox-->
                     <!--begin::Button login-->
-                    <a
-                        type="submit"
-                        class="text-white bg-[#029C55] px-10 py-2 w-50 rounded-full items-center"
-                        href="/admin">
+                    <button type="submit" class="text-white bg-[#029C55] px-10 py-2 w-50 rounded-full items-center">
                         Login
-                    </a>
+                    </button>
+                    <div class="mt-2 text-sm text-[#E21B1B] font-semibold">
+                        @if ($errors->has('login'))
+                            <p>{{ $errors->first('login') }}</p>
+                        @endif
+                    </div>
                     <!--end::Button login-->
                 </form>
                 <!--end::Form login-->
@@ -82,12 +91,7 @@
     </div>
     
 <script>
-  window.addEventListener('load', () => {
-    const loader = document.getElementById('loading-screen');
-    const content = document.getElementById('main-container');
-    loader.style.display = 'none';
-    content.classList.remove('hidden');
-  });
+
 </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tailwind Test</title>
+    <title>Mepro Visit</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -10,13 +10,18 @@
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 </head>
 <body class="min-h-screen bg-[#E8F5EC] overflow-x-hidden">
+    <!--begin::Loading-->
+    <div id="loadingOverlay" class="hidden fixed inset-0 flex z-99 w-screen justify-center items-center">
+        @include('components.loading')
+    </div>
+    <!--end::Loading-->
     <div id="layout" class="flex">
         @include('components.sidebar')
 
         <div class="flex flex-col flex-1">
             @include('components.header')
 
-            <main class="p-4 gap-4 m-3">
+            <main id="main" class="p-4 gap-4 m-3 transition-all duration-300">
                 <div class="w-full max-w-screen-xl mx-auto">
                     <div class="flex flex-wrap justify-between">
                         <!--begin::Overview-->
@@ -27,7 +32,7 @@
                             <nav class="flex" aria-label="Breadcrumb">
                                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:[space-x-reverse]">
                                     <li class="inline-flex items-center">
-                                        <a href="/admin" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
+                                        <a href="{{ route('dashboard') }}" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
                                             Dashboard
                                         </a>
                                     </li>
@@ -51,7 +56,7 @@
                             <div class="flex gap-2 items-center text-sm">
                                 <span>Showing</span>
 
-                                <button id="dropdownEntriesButton" data-dropdown-toggle="dropdownEntriesMenu" class="flex px-2 py-1 justify-center items-center bg-[#029C5560] rounded-sm cursor-pointer" type="button">
+                                <button id="dropdownEntriesButton" data-dropdown-toggle="dropdownEntriesMenu" class="flex px-2 py-1 justify-center items-center bg-[#029C5560] rounded-sm shadow-sm cursor-pointer" type="button">
                                     <span id="selectedEntries">10</span>
                                     <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -70,7 +75,7 @@
                             <!--end::Entry dropdown-->
                             
                             <!--begin::Filter button-->
-                            <button id="filterButton" onclick="toggleFilter()" class="relative">
+                            <button id="filterButton" onclick="toggleFilter()" class="relative shadow-sm">
                                 <div class="flex gap-2 px-2 py-1 justify-center items-center bg-white rounded-sm font-bold cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
@@ -83,7 +88,7 @@
                             <!--end::Filter button-->
                             
                             <!--begin::Export button-->
-                            <div class="flex gap-2 px-2 py-1 justify-center items-center bg-white rounded-sm font-bold cursor-pointer">
+                            <div class="flex gap-2 px-2 py-1 justify-center items-center bg-white rounded-sm font-bold shadow-sm cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                 </svg>
@@ -92,7 +97,7 @@
                             <!--end::Export button-->
                             
                             <!--begin::Tambah kunjungan baru-->
-                            <a href="/admin/form-kunjungan" class="flex gap-2 px-2 py-1 justify-center items-center bg-[#029C55] rounded-sm text-white font-bold cursor-pointer">
+                            <a href="{{ route('kunjungan.tambahKunjungan') }}" class="flex gap-2 px-2 py-1 justify-center items-center bg-[#029C55] rounded-sm text-white font-bold shadow-sm cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
@@ -110,6 +115,16 @@
     </div>
     
 <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        document.querySelectorAll("a").forEach(function (link){
+            link.addEventListener("click", function(e){
+                if(link.getAttribute("href") && link.getAttribute("href").charAt(0) !== "#"){
+                    document.getElementById("loadingOverlay").classList.remove("hidden");
+                }
+            })
+        })
+    });
+        
     $(document).ready(function () {
         // Inisialisasi DataTables
         var visitorTable = $('#tableKunjungan').DataTable({

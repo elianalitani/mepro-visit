@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
-    <title>Tailwind Test</title>
+    <title>Mepro Visit</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -11,14 +11,19 @@
     <link href="https://unpkg.com/flowbite@latest/dist/flowbite.min.css" />
 </head>
 <body class="min-h-screen bg-[#E8F5EC] overflow-x-hidden">
+    <!--begin::Loading-->
+    <div id="loadingOverlay" class="hidden fixed inset-0 flex z-99 w-screen justify-center items-center">
+        @include('components.loading')
+    </div>
+    <!--end::Loading-->
     <div id="layout" class="flex">
         @include('components.sidebar')
 
         <div class="flex flex-col flex-1">
             @include('components.header')
 
-            <main class="p-4 gap-4 m-3">
-                <div class="w-full max-w-screen-xl mx-auto">
+            <main id="main" class="p-4 gap-4 m-3 transition-all duration-300">
+                <div class="w-full max-w-screen-xl mx-auto ">
                     <div class="flex flex-">
                         <!--begin::Overview-->
                         <div class="flex flex-col">
@@ -28,7 +33,7 @@
                             <nav class="flex" aria-label="Breadcrumb">
                                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse]">
                                     <li class="inline-flex items-center">
-                                        <a href="/admin" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
+                                        <a href="{{ route('dashboard') }}" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
                                             Dashboard
                                         </a>
                                     </li>
@@ -37,7 +42,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m9 20.247 6-16.5" />
                                             </svg>
-                                            <a href="/admin/daftar-kunjungan" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
+                                            <a href="{{ route('akun.index') }}" class="inline-flex items-center text-sm text-[#029C55] font-medium underline hover:text-[#029c5550]">
                                                 Daftar Akun
                                             </a>
                                         </div>  
@@ -120,20 +125,30 @@
     </div>
 
 <script>
-  document.querySelectorAll('[data-hs-toggle-password]').forEach(button => {
-    const targetSelector = JSON.parse(button.getAttribute('data-hs-toggle-password')).target;
-    const input = document.querySelector(targetSelector);
-
-    button.addEventListener('click', () => {
-      const isPassword = input.type === 'password';
-      input.type = isPassword ? 'text' : 'password';
-      
-      button.querySelectorAll('.hs-password-active\\:hidden, .hs-password-active\\:block, .hs-confirmPassword-active\\:hidden, .hs-confirmPassword-active\\:block').forEach(el => {
-        el.classList.toggle('hidden');
-        el.classList.toggle('block');
-      });
+    document.addEventListener("DOMContentLoaded", function(){
+        document.querySelectorAll("a").forEach(function (link){
+            link.addEventListener("click", function(e){
+                if(link.getAttribute("href") && link.getAttribute("href").charAt(0) !== "#"){
+                    document.getElementById("loadingOverlay").classList.remove("hidden");
+                }
+            })
+        })
     });
-  });
+    
+    document.querySelectorAll('[data-hs-toggle-password]').forEach(button => {
+        const targetSelector = JSON.parse(button.getAttribute('data-hs-toggle-password')).target;
+        const input = document.querySelector(targetSelector);
+
+        button.addEventListener('click', () => {
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        
+        button.querySelectorAll('.hs-password-active\\:hidden, .hs-password-active\\:block, .hs-confirmPassword-active\\:hidden, .hs-confirmPassword-active\\:block').forEach(el => {
+            el.classList.toggle('hidden');
+            el.classList.toggle('block');
+        });
+        });
+    });
 </script>
 
 

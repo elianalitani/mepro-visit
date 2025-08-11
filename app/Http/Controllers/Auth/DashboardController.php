@@ -10,14 +10,15 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $user = Auth::user()->load('karyawan');
+        return view('dashboard');
+        // $user = Auth::user()->load('karyawan');
         
-        if($user->role === 'Satpam'){
-            return view('security.dashboard', compact('user'));
-        }elseif($user->role === 'Resepsionis'){
-            return view('receptionist.dashboard', compact('user'));
-        }elseif($user->role === 'Admin'){
-            return view('admin.dashboard', compact('user'));
-        }
+        // if($user->role === 'Satpam'){
+        //     return view('security.dashboard', compact('user'));
+        // }elseif($user->role === 'Resepsionis'){
+        //     return view('receptionist.dashboard', compact('user'));
+        // }elseif($user->role === 'Admin'){
+        //     return view('admin.dashboard', compact('user'));
+        // }
     }
 }

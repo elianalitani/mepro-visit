@@ -7,7 +7,7 @@
 </head>
 <body class="w-full max-h-screen h-fit sm:min-h-screen">
     <!--begin::Header-->
-    <div class="flex flex-row flex-wrap gap-2 sm:gap-4 p-3 w-full justify-center sm:justify-between items-center bg-white">    
+    <div id="header" class="flex flex-row flex-wrap gap-2 sm:gap-4 p-3 w-full justify-center sm:justify-between items-center bg-white transition-all duration-300">    
         <div class="font-bold text-sm sm:text-base lg:text-lg hidden sm:block">Dashboard</div>
         
         <!--begin::Search bar-->
@@ -40,7 +40,7 @@
         <!--end::Notification-->
         
         <!--begin::Account-->
-        <div class="flex items-center gap-2 order-3 sm:order-none">
+        <div class="flex w-48 items-center gap-2 order-3 sm:order-none">
             <!--begin::Profile picture-->
             <div class="shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#908787" class="size-8 sm:size-10">

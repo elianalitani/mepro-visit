@@ -14,4 +14,16 @@ class AkunController extends Controller
         
         return view('admin.daftarAkun');
     }
+    
+    public function tambahAkun(){
+        return view('admin.formAkun');
+    }
+    
+    public function lihatAkun(){
+        return view('admin.detailAkun');
+    }
+    
+    public function editAkun(){
+        return view('admin.editAkun');
+    }
 }

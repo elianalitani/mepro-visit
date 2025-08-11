@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tailwind Test</title>
+    <title>Mepro Visit</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -10,18 +10,23 @@
     
 </head>
 <body class="min-h-screen bg-[#E8F5EC] overflow-x-hidden">
+    <!--begin::Loading-->
+    <div id="loadingOverlay" class="hidden fixed inset-0 flex z-99 w-screen justify-center items-center">
+        @include('components.loading')
+    </div>
+    <!--end::Loading-->
     <div id="layout" class="flex">
         @include('components.sidebar')
 
         <div class="flex flex-col flex-1">
             @include('components.header')
 
-            <main class="p-4 gap-4 m-3">
+            <main id="main" class="p-4 gap-4 m-3 transition-all duration-300">
                 <div class="w-full max-w-screen-xl mx-auto">
                     <div class="flex flex-wrap justify-between">
                         <!--begin::Overview-->
                         <div class="flex flex-col">
-                            <span class="text-xl font-bold">Overview Satpam</span>
+                            <span class="text-xl font-bold">Overview</span>
                         </div>
                         <!--end::Overview-->
                         
@@ -176,7 +181,17 @@
         </div>
     </div>
     
-<script>
+<script>    
+    document.addEventListener("DOMContentLoaded", function(){
+        document.querySelectorAll("a").forEach(function (link){
+            link.addEventListener("click", function(e){
+                if(link.getAttribute("href") && link.getAttribute("href").charAt(0) !== "#"){
+                    document.getElementById("loadingOverlay").classList.remove("hidden");
+                }
+            })
+        })
+    });
+    
     $(document).ready(function () {
         // Inisialisasi DataTables
         var visitorTable = $('#tableKunjungan').DataTable({

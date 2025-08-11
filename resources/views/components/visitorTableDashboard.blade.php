@@ -5,7 +5,7 @@
     <!--begin::Header-->    
     <div class="flex flex-row p-4 justify-between">
         <span class="text-sm sm:text-2xl font-bold">Kunjungan Terakhir</span>
-            <a class="text-sm text-blue-500 hover:underline" href="/daftar-kunjungan">View all</a>
+        <a href="{{ route('kunjungan.index') }}" class="text-sm text-blue-500 hover:underline">View all</a>
     </div>
     <!--end::Header-->
     <!--begin::Table-->

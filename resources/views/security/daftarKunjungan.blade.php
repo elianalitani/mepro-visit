@@ -125,15 +125,17 @@
     });
     
     $(document).ready(function () {
-        // Inisialisasi DataTables
         var visitorTable = $('#tableKunjungan').DataTable({
             "aaSorting": [],
             "paging": true,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "info": false,
             "ordering": false,
+            "dom": 'lrtip',
             "language": {
+                "zeroRecords": '<div class="text-center p-4 text-[#E21B1B] font-medium">Tidak ada data ditemukan</div>',
+                "emptyTable": '<div class="text-center p-4 text-gray-500">Belum ada data kunjungan</div>',
                 "paginate": {
                     "previous": "< Sebelumnya",
                     "next": "Selanjutnya >"
@@ -145,12 +147,12 @@
             }
         });
 
-        // Hubungkan input pencarian ke DataTables
+        // Searching
         $('#searchKunjungan').on('keyup', function () {
             visitorTable.search(this.value).draw();
         }); 
 
-        // Hubungkan pagination
+        // Pagination
         $('#dropdownEntriesMenu a').on('click', function (e) {
             e.preventDefault();
 

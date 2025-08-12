@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-3xl font-bold">50</span>
-                                    <span class="p-1 bg-[#eefbe8] rounded-full text-sm text-[#59d257]">
+                                    <span class="p-1 bg-[#eefbe8] rounded-full text-xs sm:text-sm text-[#59d257]">
                                         <span class="font-bold">+2</span>
                                         <span>dari hari kemarin</span>
                                 </div>
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-3xl font-bold">50</span>
-                                    <span class="p-1 bg-[#fbfbe8] rounded-full text-sm text-[#fad230]">
+                                    <span class="p-1 bg-[#fbfbe8] rounded-full text-xs sm:text-sm text-[#fad230]">
                                         <span class="font-bold">+2</span>
                                         <span>dari hari kemarin</span>
                                 </div>
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-3xl font-bold">50</span>
-                                    <span class="p-1 bg-[#e9e8fb] rounded-full text-sm text-[#3171da]">
+                                    <span class="p-1 bg-[#e9e8fb] rounded-full text-xs sm:text-sm text-[#3171da]">
                                         <span class="font-bold">+2</span>
                                         <span>dari hari kemarin</span>
                                 </div>
@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="text-3xl font-bold">50</span>
-                                    <span class="p-1 bg-[#fbe8e8] rounded-full text-sm text-[#e21b1b]">
+                                    <span class="p-1 bg-[#fbe8e8] rounded-full text-xs sm:text-sm text-[#e21b1b]">
                                         <span class="font-bold">+2</span>
                                         <span>dari hari kemarin</span>
                                 </div>

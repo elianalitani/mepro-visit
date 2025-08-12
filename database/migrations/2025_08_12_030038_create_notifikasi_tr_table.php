@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('id_kunjungan', 12)->nullable();
             $table->timestamps();
 
-            $table->foreign('id_kunjungan')->references('id_Kunjungan')->on('kunjungan_tr')->onDelete('set null');
+            $table->foreign('id_kunjungan')->references('id_kunjungan')->on('kunjungan_tr')->onDelete('set null');
         });
     }
 

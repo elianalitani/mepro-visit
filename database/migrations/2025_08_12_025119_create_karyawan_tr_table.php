@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('nik', 16);
             $table->string('nama', 255);
             $table->string('email', 100);
+            $table->date('tanggal_lahir');
             $table->string('no_hp', 20);
             $table->string('alamat', 255);
             $table->string('id_divisi', 12);
             $table->string('jabatan', 255);
-            $table->date('tanggal_lahir');
             $table->string('status_kepegawaian', 255);
+            $table->string('foto', 255)->nullable();
             $table->timestamps();
 
             $table->foreign('id_divisi')->references('id_divisi')->on('divisi_mt')->onDelete('set null');

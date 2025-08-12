@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kunjungan_tr', function (Blueprint $table) {
-            $table->string('ttd_pihaktujuan', 255)->nullable()->after('id_karyawan');
+        Schema::create('divisi_mt', function (Blueprint $table) {
+            $table->string('id_divisi', 12)->primary();
+            $table->string('nama_divisi', 255);
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kunjungan_tr', function (Blueprint $table) {
-            $table->string('ttd_pihaktujuan', 255)->nullable()->after('id_karyawan');
-        });
+        Schema::dropIfExists('divisi_mt');
     }
 };

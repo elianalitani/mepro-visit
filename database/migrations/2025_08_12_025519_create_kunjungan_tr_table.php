@@ -12,21 +12,25 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kunjungan_tr', function (Blueprint $table) {
-            $table->string('id_Kunjungan', 12)->primary();
+            $table->string('id_kunjungan', 12)->primary();
             $table->string('nama_tamu', 255);
-            $table->string('no_Identitas', 255);
+            $table->string('no_identitas', 255);
             $table->string('instansi', 255);
             $table->string('keperluan', 255);
-            $table->date('waktu_kedatangan');
-            $table->date('waktu_kepulangan')->nullable();
+            $table->date('tanggal_kunjungan');
+            $table->time('waktu_kedatangan');
+            $table->time('waktu_kepulangan')->nullable();
             $table->string('status', 50);
-            $table->boolean('show_is');
+            $table->string('ttd_pihaktujuan', 255)->nullable();
             $table->string('id_karyawan', 12);
-            $table->string('id_user', 12);
+            $table->string('id_user_satpam', 12)->nullable();
+            $table->string('id_user_resepsionis', 12)->nullable();
+            $table->boolean('show_is');
             $table->timestamps();
 
             $table->foreign('id_karyawan')->references('nip')->on('karyawan_mt')->onDelete('set null');
-            $table->foreign('id_user')->references('id')->on('user_tr')->onDelete('set null');
+            $table->foreign('id_user_satpam')->references('id')->on('user_tr')->onDelete('set null');
+            $table->foreign('id_user_resepsionis')->references('id')->on('user_tr')->onDelete('set null');
         });
     }
 

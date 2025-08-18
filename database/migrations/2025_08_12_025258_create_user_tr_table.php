@@ -12,13 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_tr', function (Blueprint $table) {
-            $table->string('id', 12)->primary();
+            $table->bigIncrements('id');
+            $table->string('id_user', 12)->primary();
             $table->string('username', 12);
             $table->string('password', 255);
             $table->string('role', 50);
             $table->string('id_karyawan', 12);
-            $table->boolean('show_is');
+            $table->string('status', 225);
+            $table->boolean('is_deleted');
             $table->timestamps();
+            $table->withUserAudit();
 
             $table->foreign('id_karyawan')->references('nip')->on('karyawan_mt')->onDelete('set null');
         });

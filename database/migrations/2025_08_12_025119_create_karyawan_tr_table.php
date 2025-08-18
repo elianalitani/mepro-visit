@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('karyawan_mt', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('nip', 12)->primary();
             $table->string('nik', 16);
             $table->string('nama', 255);
@@ -23,7 +24,9 @@ return new class extends Migration
             $table->string('jabatan', 255);
             $table->string('status_kepegawaian', 255);
             $table->string('foto', 255)->nullable();
+            $table->boolean('is_deleted');
             $table->timestamps();
+            $table->withUserAudit();
 
             $table->foreign('id_divisi')->references('id_divisi')->on('divisi_mt')->onDelete('set null');
         });

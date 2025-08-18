@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kunjungan_tr', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('id_kunjungan', 12)->primary();
             $table->string('nama_tamu', 255);
             $table->string('no_identitas', 255);
@@ -21,16 +22,17 @@ return new class extends Migration
             $table->time('waktu_kedatangan');
             $table->time('waktu_kepulangan')->nullable();
             $table->string('status', 50);
-            $table->string('ttd_pihaktujuan', 255)->nullable();
+            $table->string('deskripsi', 255)->nullable();
             $table->string('id_karyawan', 12);
             $table->string('id_user_satpam', 12)->nullable();
             $table->string('id_user_resepsionis', 12)->nullable();
-            $table->boolean('show_is');
+            $table->boolean('is_deleted');
             $table->timestamps();
+            $table->withUserAudit();
 
             $table->foreign('id_karyawan')->references('nip')->on('karyawan_mt')->onDelete('set null');
-            $table->foreign('id_user_satpam')->references('id')->on('user_tr')->onDelete('set null');
-            $table->foreign('id_user_resepsionis')->references('id')->on('user_tr')->onDelete('set null');
+            $table->foreign('id_user_satpam')->references('id_user')->on('user_tr')->onDelete('set null');
+            $table->foreign('id_user_resepsionis')->references('id_user')->on('user_tr')->onDelete('set null');
         });
     }
 

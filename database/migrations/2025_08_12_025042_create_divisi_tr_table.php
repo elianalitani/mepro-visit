@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('divisi_mt', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('id_divisi', 12)->primary();
             $table->string('nama_divisi', 255);
+            $table->boolean('is_deleted');
             $table->timestamps();
+            $table->withUserAudit();
         });
     }
 

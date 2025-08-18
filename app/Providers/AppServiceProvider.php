@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Schema\Blueprint;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // definisi macro baru
+        Blueprint::macro('withUserAudit', function () {
+            $this->string('created_by', 12)->nullable();
+            $this->string('modified_by', 12)->nullable();
+        });
     }
 }

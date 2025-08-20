@@ -63,7 +63,7 @@
                 <!--begin::Form kunjungan-->
                 <form class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 mt-6 bg-white rounded-xl shadow-sm">
                     <!--begin::Form kiri-->
-                    <div class="flex flex-col h-full">
+                    <div class="flex flex-col h-full mb-5">
                         <!--begin::Nama tamu-->
                         <div class="mb-5 w-full">
                             <label for="namaTamu" class="block mb-2 text-sm text-gray-900 font-medium">Nama Tamu <span class="text-xs text-[#e21b1b]">*</span></label>
@@ -73,19 +73,13 @@
                         
                         <!--begin::Foto identitas dan instansi-->
                         <div class="flex flex-col md:flex-row gap-4">
-                            <!--begin::Foto identitas-->
+                            
+                            <!--begin::Nomor identitas-->
                             <div class="mb-5 w-full">
-                                <label class="block mb-2 text-sm text-gray-900 font-medium">Foto Identitas <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <label for="fotoIdentitas" class="flex gap-2 p-2.5 items-center bg-[#029C55] rounded-lg text-sm text-white cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-                                    </svg>
-                                    <span>Upload Foto</span>
-                                </label>
-                                <input type="file" id="fotoIdentitas" class="hidden" required />
+                                <label for="identitas" class="block mb-2 text-sm text-gray-900 font-medium">Nomor Identitas <span class="text-xs text-[#e21b1b]">*</span></label>
+                                <input type="text" id="identitas" class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Contoh: KTP/SIM/Paspor" required />
                             </div>
-                            <!--end::Foto identitas-->
+                            <!--end::Nomor identitas-->
                             
                             <!--begin::Instansi-->
                             <div class="mb-5 w-full">
@@ -95,38 +89,6 @@
                             <!--end::Instansi-->
                         </div>
                         <!--end::Foto identitas dan instansi-->
-                        
-                        <!--begin::Tanggal dan waktu kunjungan-->
-                        <div class="flex flex-col md:flex-row gap-4">
-                            <!--begin::Tanggal kunjungan-->
-                            <div class="mb-5 w-full">
-                                <label for="tanggalKunjungan" class="block mb-2 text-sm text-gray-900 font-medium">Tanggal Kunjungan <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <div class="relative max-w-sm">
-                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                        </svg>
-                                    </div>
-                                    <input datepicker datepicker-buttons datepicker-autoselect-today id="datepicker-actions" type="text" class="block w-full ps-10 p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="DD/MM/YYYY">
-                                </div>
-                            </div>
-                            <!--end::Tanggal kunjungan-->
-                            
-                            <!--begin::Waktu kedatangan-->
-                            <div class="mb-5 w-full">
-                                <label for="waktuKedatangan" class="block mb-2 text-sm text-gray-900 font-medium">Waktu Kedatangan <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
-                                        </svg>
-                                    </div>
-                                    <input type="time" id="time" class="block w-full ps-10 p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-500" min="09:00" max="18:00" value="00:00" required />
-                                </div>
-                            </div>
-                            <!--end::Waktu kedatangan-->
-                        </div>
-                        <!--end::Tanggal dan waktu kunjungan-->
                         
                         <!--begin::Keperluan-->
                         <div class="mb-5">
@@ -193,79 +155,33 @@
                         </div>
                         <!--end::Pihak dan divisi tujuan-->
                         
-                        <!--begin::Status-->
-                        <div class="mb-5 w-full">
-                            <label for="status" class="block mb-2 text-sm text-gray-900 font-medium">Status <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <!--begin::Dropdown-->
-                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownStatus" class="flex w-full p-2.5 justify-between items-center border border-gray-300 rounded-lg text-sm text-gray-900" type="button">
-                                    Pilih status   
-                                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                    </svg>
-                                </button>
-                                    
-                                    <!--begin::Dropdown menu -->
-                                    <div id="dropdownStatus" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm">
-                                        <ul class="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
-                                            <li>
-                                                <a class="block px-4 py-2 hover:bg-[#eefbe8]">Pilih pihak tujuan</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!--end::Dropdown menu-->       
-                                <!--end::Dropdown-->
-                        </div>
-                        <!--end::Status-->
-                        
                         <!--begin::Nama satpam dan resepsionis-->
                         <div class="flex flex-col md:flex-row gap-4">
                             <div class="mb-5 w-full">
                                 <label for="satpam" class="block mb-2 text-sm text-gray-900 font-medium">Satpam <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <input type="text" id="satpam" class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Nama satpam sesuai yang mendaftarkan" required />
+                                <input 
+                                    type="text" id="satpam" class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Masukkan nama satpam" required 
+                                    value="{{ Auth::user()->role == 'satpam' ? Auth::user()->karyawan->nama : '' }}"
+                                    @if(Auth::user()->role != 'satpam') disabled @endif
+                                />
                             </div>
                             <div class="mb-5 w-full">
                                 <label for="resepsionis" class="block mb-2 text-sm text-gray-900 font-medium">Resepsionis <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <input type="text" id="resepsionis" class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Masukkan nama resepsionis" required />
+                                <input 
+                                    type="text" id="resepsionis" class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Masukkan nama resepsionis" required 
+                                    value="{{ Auth::user()->role == 'resepsionis' ? Auth::user()->karyawan->nama : '' }}"
+                                    @if(Auth::user()->role != 'resepsionis') disabled @endif
+                                />
                             </div>
                         </div>
                         <!--end::Nama satpam dan resepsionis-->
                         
-                        <!--begin::Unggah TTD dan waktu kepulangan-->
-                        <div class="flex flex-col md:flex-row gap-4">
-                            <!--begin::Unggah TTD-->
-                            <div class="mb-5 w-full">
-                                <label class="block mb-2 text-sm text-gray-900 font-medium">Unggah Tandatangan <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <label for="fotoTTD" class="flex gap-2 p-2.5 items-center bg-[#029C55] rounded-lg text-sm text-white cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-                                    </svg>
-                                    <span>Upload TTD</span>
-                                </label>
-                                <input type="file" id="fotoTTD" class="hidden" required />
-                            </div>
-                            <!--end::Unggah TTD-->
-                            
-                            <!--begin::Waktu kepulangan-->
-                            <div class="mb-5 w-full">
-                                <label for="waktuKepulangan" class="block mb-2 text-sm text-gray-900 font-medium">Waktu Kepulangan <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
-                                        </svg>
-                                    </div>
-                                    <input type="time" id="time" class="block w-full ps-10 p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-500" min="09:00" max="18:00" value="00:00" required />
-                                </div>
-                            </div>
-                            <!--end::Waktu kepulangan-->
-                        </div>
-                        <!--end::Unggah TTD dan waktu kepulangan-->
-                        
+                        <!--begin::Button-->
                         <div class="flex w-full justify-end items-end gap-2 text-sm">
                             <button type="submit" class="p-2.5 px-7 justify-center items-center bg-[#029C55] rounded-lg text-white">Simpan</button>
                             <button class="p-2.5 px-7 justify-center items-center bg-gray-50 border border-gray-300 rounded-lg">Batal</button>
                         </div>
+                        <!--end::Button-->
                     </div>          
                     <!--end::Form kanan-->
                 </form>

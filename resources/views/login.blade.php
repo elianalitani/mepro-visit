@@ -12,7 +12,7 @@
             <img src="{{ asset('assets/images/logo-white.png') }}" alt="Logo MeproVisit" class="w-24 md:w-30 h-auto hidden sm:block">
             <div class="text-3xl sm:text-5xl text-white font-medium hidden sm:block">Hey, Hello!</div>
             <div class="text-lg md:text-md text-white font-regular hidden sm:block">Monitor visitor flow with ease. Seamless check in, better control.</div>
-            <div class="text-[#ffffff90] font-light hidden sm:block">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            <!-- <div class="text-[#ffffff90] font-light hidden sm:block">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div> -->
         </div>
         <!--end::Kontainer kiri-->
         
@@ -67,12 +67,6 @@
                         </label>
                     </div>
                     <!--end::Password-->
-                    <!--begin::Checkbox-->
-                    <div class="flex items-center justify-center mb-5">
-                        <input type="checkbox" id="logged-in" class="w-4 h-4 border-gray-300 rounded-none" />
-                        <label class="text-sm ml-3 text-[#00000070]">Remember me</label>
-                    </div>
-                    <!--end::Checkbox-->
                     <!--begin::Button login-->
                     <button type="submit" class="text-white bg-[#029C55] px-10 py-2 w-50 rounded-full items-center">
                         Login

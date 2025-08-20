@@ -32,5 +32,14 @@ class Karyawan extends Model
         'tanggal_lahir',
         'status_kepegawaian'
     ];
+    
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'id_divisi', 'id_divisi');
+    }
+    
+    public function user(){
+        return $this->belongsTo(User::class, 'id_karyawan', 'nip');
+    }
 }
 

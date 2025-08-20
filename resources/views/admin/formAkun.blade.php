@@ -67,30 +67,6 @@
                     <!--begin::Form kiri-->
                     <div class="flex flex-col h-full gap-4 p-4 mt-6 bg-white rounded-xl shadow-sm">
                         
-                        <!--begin::Divisi karyawan-->
-                        <div class="mb-5 w-full">
-                            <label for="divisiKaryawan" class="block mb-2 text-sm text-gray-900 font-medium">Divisi <span class="text-xs text-[#e21b1b]">*</span></label>
-                            <!--begin::Dropdown-->
-                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownDivisiK" class="flex w-full p-2.5 justify-between items-center border border-gray-300 rounded-lg text-sm text-gray-900" type="button">
-                                    Pilih divisi    
-                                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                    </svg>
-                                </button>
-                            
-                                <!--begin::Dropdown menu -->
-                                <div id="dropdownDivisiK" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm">
-                                    <ul class="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
-                                        <li>
-                                            <a class="block px-4 py-2 hover:bg-[#eefbe8]">Pilih divisi</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!--end::Dropdown menu-->       
-                            <!--end::Dropdown-->
-                        </div>
-                        <!--end::Divisi karyawan-->
-                        
                         <!--begin::Nama karyawan-->
                         <div class="mb-5 w-full">
                             <label for="namaKaryawan" class="block mb-2 text-sm text-gray-900 font-medium">Nama Karyawan <span class="text-xs text-[#e21b1b]">*</span></label>                              
@@ -115,6 +91,30 @@
                         </div>
                         <!--end::Nama karyawan-->
                         
+                        <!--begin::Divisi karyawan-->
+                        <div class="mb-5 w-full">
+                            <label for="divisiKaryawan" class="block mb-2 text-sm text-gray-900 font-medium">Divisi <span class="text-xs text-[#e21b1b]">*</span></label>
+                            <!--begin::Dropdown-->
+                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownDivisiK" class="flex w-full p-2.5 justify-between items-center border border-gray-300 rounded-lg text-sm text-gray-900" type="button">
+                                    Pilih divisi    
+                                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                    </svg>
+                                </button>
+                            
+                                <!--begin::Dropdown menu -->
+                                <div id="dropdownDivisiK" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm">
+                                    <ul class="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
+                                        <li>
+                                            <a class="block px-4 py-2 hover:bg-[#eefbe8]">Pilih divisi</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end::Dropdown menu-->       
+                            <!--end::Dropdown-->
+                        </div>
+                        <!--end::Divisi karyawan-->
+                        
                         <!--begin::Username-->
                         <div class="mb-5 w-full">
                             <label for="username" class="block mb-2 text-sm text-gray-900 font-medium">Username <span class="text-xs text-[#e21b1b]">*</span></label>
@@ -126,7 +126,7 @@
                         <div class="mb-5 w-full">
                             <label for="password" class="block mb-2 text-sm text-gray-900 font-medium">Password <span class="text-xs text-[#e21b1b]">*</span></label>
                             <div class="relative">
-                                <input id="hs-toggle-password" type="password" class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Password minimal 8 karakter"">
+                                <input id="password hs-toggle-password" type="password" class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Password minimal 8 karakter"">
                                 <button type="button" data-hs-toggle-password='{
                                     "target": "#hs-toggle-password"
                                 }' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
@@ -142,6 +142,27 @@
                             </div>
                         </div>
                         <!--end::Password-->
+                        
+                        <!--begin::Konfirmasi password-->
+                        <div class="mb-5 w-full">
+                            <label for="confirmPassword" class="block mb-2 text-sm text-gray-900 font-medium">Konfirmasi Password <span class="text-xs text-[#e21b1b]">*</span></label>
+                            <div class="relative">
+                                <input id="confirmPassword hs-toggle-password" type="password" class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Password minimal 8 karakter"">
+                                <button type="button" data-hs-toggle-password='{
+                                    "target": "#hs-toggle-password"
+                                }' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
+                                    <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                                        <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                                        <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                                        <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                                        <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                        <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <!--end::Konfirmasi password-->
                         
                         <div class="flex text-sm w-full justify-end items-end gap-2">
                             <button type="submit" class="p-2.5 px-7 rounded-lg bg-[#029C55] justify-center items-center text-white">Simpan</button>

@@ -11,12 +11,12 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'user_tr';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_user';
     public $incrementing = false;
     protected $keyType = 'string';
     
     protected $fillable = [
-        'id',
+        'id_user',
         'username',
         'password',
         'role',

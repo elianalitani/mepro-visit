@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\AkunController;
 
+
 /* Routing untuk login dan logout */
 
 Route::get('/', function () {
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function(){
     
     Route::middleware('role:Admin')->group(function(){
         Route::get('/akun/tambah', [AkunController::class, 'tambahAkun'])->name('akun.tambahAkun');
+        Route::post('/akun/tambah', [AkunController::class, 'simpanAkun'])->name('akun.simpanAkun');
     });
     
     Route::middleware('role:Admin')->group(function(){
@@ -40,7 +42,9 @@ Route::middleware('auth')->group(function(){
     });
     
     Route::middleware('role:Admin')->group(function(){
-        Route::get('/akun/edit', [AkunController::class, 'editAkun'])->name('akun.editAkun');
+        Route::get('/akun/edit/{id_user}', [AkunController::class, 'editAkun'])->name('akun.editAkun');
+        Route::put('/akun/update/{id_user}', [AkunController::class, 'updateAkun'])->name('akun.updateAkun');
+
     });
 });
 

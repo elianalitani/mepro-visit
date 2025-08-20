@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Divisi;
+use App\Models\Karyawan;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
 class AkunController extends Controller
@@ -49,7 +52,7 @@ class AkunController extends Controller
             })
             ->editColumn('aksi', function($row) { 
                 return '<div class="flex flex-row gap-2 justify-center items-center text-center"> 
-                    <a id="edit-akun"> 
+                    <a id="edit-akun"href="'.route('akun.editAkun', $row->id_user).'"> 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                         </svg>                  
@@ -85,11 +88,76 @@ class AkunController extends Controller
     
     /* tambahAkun: membuat akun baru */
     public function tambahAkun(){
-        return view('admin.formAkun');
+        // mengambil data karyawan dari database
+        $karyawan = Karyawan::whereIn('id_divisi', ['DV01', 'DV02'])->get();
+        // mengambil data divisi dari database
+        return view('admin.formAkun', compact('karyawan'));
     }
-    
+
+    public function simpanAkun(Request $request)
+    {
+        $request->validate([
+            'id_karyawan' => 'required|exists:karyawan_mt,nip',
+            'role' => 'required|string',
+            'username' => 'required|string|unique:user_tr,username',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $lastUser = User::orderBy('id_user', 'desc')->first();
+
+        if ($lastUser) {
+            $lastNumber = (int) substr($lastUser->id_user, 1);
+            $newId = 'U' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+        } else {
+            $newId = 'U001';
+        }
+
+        $karyawan = Karyawan::findOrFail($request->id_karyawan);
+
+        $user = new User();
+        $user->id_user     = $newId; 
+        $user->id_karyawan = $karyawan->nip;
+        $user->role        = $request->role;
+        $user->username    = $request->username;
+        $user->password    = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('admin.daftarAkun')
+                        ->with('success', 'Akun berhasil ditambahkan!');
+    }
+
     /* editAkun: mengedit detail akun */
-    public function editAkun(){
-        return view('admin.editAkun');
+    public function editAkun($id_user){
+        $karyawan = Karyawan::whereIn('id_divisi', ['DV01', 'DV02'])->first();
+        $akun = User::where('id_user', $id_user)->firstOrFail();
+        return view('admin.editAkun', compact('akun', 'karyawan'));
     }
+
+    public function updateAkun(Request $request, $id_user)
+    {
+        $akun = User::where('id_user', $id_user)->firstOrFail();
+
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'old_password' => 'required',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        if (!\Hash::check($request->old_password, $akun->password)) {
+            return back()->withErrors(['old_password' => 'Password lama tidak sesuai']);
+        }
+
+        $akun->username = $request->username;
+
+        if ($request->filled('password')) {
+            $akun->password = bcrypt($request->password);
+        }
+
+        $akun->save();
+
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil diupdate');
+    }
+
+
+
 }

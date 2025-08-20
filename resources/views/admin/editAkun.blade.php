@@ -62,100 +62,73 @@
                 </div>
                 
                 <!--begin::Form akun-->
-                <form class="grid grid-cols-1 md:grid-cols-2">
-                    <!--begin::Form kiri-->
+                <form action="{{ route('akun.updateAkun', $akun->id_user) }}" method="POST" class="grid grid-cols-1 md:grid-cols-2">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- Form kiri -->
                     <div class="flex flex-col h-full bg-white rounded-xl gap-4 mt-6 shadow-sm p-4">                       
                         <div class="flex md:flex-col border border-gray-300 rounded-lg p-2.5">
                             <div class="flex flex-row gap-2">
                                 <div class="mb-5 w-full">
-                                    <label for="divisi" class="block mb-2 text-sm font-medium text-gray-900">Divisi</label>
-                                    <input type="text" id="divisi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value="Resepsionis" disabled />
+                                    <label for="namaKaryawan" class="block mb-2 text-sm font-medium text-gray-900">Nama Karyawan</label>
+                                    <input type="text" id="namaKaryawan" value="{{$karyawan-> nama}}" disabled
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                                 </div>
                                 <div class="mb-5 w-full">
-                                    <label for="namaKaryawan" class="block mb-2 text-sm font-medium text-gray-900">Nama Karyawan</label>
-                                    <input type="text" id="namaKaryawan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value="Maitsa Luthfiyyah" disabled />
+                                    <label for="divisi" class="block mb-2 text-sm font-medium text-gray-900">Role</label>
+                                    <input type="text" id="divisi" value="{{$akun-> role}}" disabled
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                                 </div>
-                            </div>
-                            <div class="flex flex-row text-xs items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
-                                    <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd" />
-                                </svg>
-                                <span>Divisi dan Nama Karyawan tidak dapat diubah.</span>
+                                
                             </div>
                         </div>
+
+                        <!-- Username -->
                         <div class="mb-5 w-full">
                             <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-                            <input type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value="maitsa.luthfi" disabled />
+                            <input type="text" name="username" id="username" value="{{ old('username', $akun->username) }}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                            @error('username')
+                                <span class="text-xs text-red-600">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <!--begin::Password lama-->
+
+                        <!-- Password lama -->
                         <div class="mb-5 w-full">
-                            <label for="oldPassword" class="block mb-2 text-sm font-medium text-gray-900">Password Lama <span class="text-xs text-[#e21b1b]">*</span></label>
-                            <div class="relative">
-                                <input id="oldPassword hs-toggle-password" type="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Password minimal 8 karakter">
-                                <button type="button" data-hs-toggle-password='{
-                                    "target": "#hs-toggle-password"
-                                }' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
-                                    <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
-                                        <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
-                                        <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
-                                        <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
-                                        <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                                        <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
+                            <label for="old_password" class="block mb-2 text-sm font-medium text-gray-900">Password Lama <span class="text-xs text-red-600">*</span></label>
+                            <input type="password" name="old_password" id="old_password"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                            @error('old_password')
+                                <span class="text-xs text-red-600">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <!--end::Password lama-->
-                        <!--begin::Password baru-->
+
+                        <!-- Password baru -->
                         <div class="mb-5 w-full">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password Baru <span class="text-xs text-[#e21b1b]">*</span></label>
-                            <div class="relative">
-                                <input id="hs-toggle-password" type="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Password minimal 8 karakter">
-                                <button type="button" data-hs-toggle-password='{
-                                    "target": "#hs-toggle-password"
-                                }' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
-                                    <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
-                                        <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
-                                        <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
-                                        <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
-                                        <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                                        <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password Baru</label>
+                            <input type="password" name="password" id="password"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
+                            @error('password')
+                                <span class="text-xs text-red-600">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <!--end::Password baru-->
-                        <!--begin::Konfirmasi password-->
+
+                        <!-- Konfirmasi password -->
                         <div class="mb-5 w-full">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Konfirmasi Password Baru <span class="text-xs text-[#e21b1b]">*</span></label>
-                            <div class="relative">
-                                <input id="hs-toggle-confirmPassword" type="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Password minimal 8 karakter">
-                                <button type="button" data-hs-toggle-password='{
-                                    "target": "#hs-toggle-confirmPassword"
-                                }' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
-                                    <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path class="hs-confirmPassword-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
-                                        <path class="hs-confirmPassword-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
-                                        <path class="hs-confirmPassword-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
-                                        <line class="hs-confirmPassword-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
-                                        <path class="hidden hs-confirmPassword-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                                        <circle class="hidden hs-confirmPassword-active:block" cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </button>
-                            </div>
+                            <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900">Konfirmasi Password Baru</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                         </div>
-                        <!--end::Konfirmasi password-->
-                        
+
+                        <!-- Tombol -->
                         <div class="flex text-sm w-full justify-end items-end gap-2">
-                            <button type="submit" class="p-2.5 px-7 rounded-lg bg-[#029C55] justify-center items-center text-white">Simpan</button>
-                            <button class="p-2.5 px-7 rounded-lg bg-gray-50 border border-gray-300 justify-center items-center">Batal</button>
+                            <button type="submit" class="p-2.5 px-7 rounded-lg bg-[#029C55] text-white">Simpan</button>
+                            <a href="{{ route('akun.index') }}" class="p-2.5 px-7 rounded-lg bg-gray-50 border border-gray-300">Batal</a>
                         </div>
-                        
                     </div>
-                    <!--end::Form kiri-->
                 </form>
+
                 <!--end::Form akun-->
             </main>
         </div>

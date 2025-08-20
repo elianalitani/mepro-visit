@@ -70,8 +70,8 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-32 items-center">
                                 <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
                             </svg>
-                            <div class="text-lg">Maitsa Luthfiyyah</div>
-                            <div class="text-md text-gray-500">maitsa.luthfi</div>
+                            <div class="text-lg">{{ $akun->karyawan->nama }}</div>
+                            <div class="text-md text-gray-500">{{ $akun->username }}</div>
                         </div>
                     </div>
                     <!--end::Form kiri-->
@@ -83,19 +83,23 @@
                         </div>
                         <div class="flex">
                             <div class="w-48 text-gray-500">Username</div>
-                            <div class="text-black font-medium">maitsa.luthfi</div>
+                            <div class="text-black font-medium">{{ $akun->username }}</div>
                         </div>
                         <div class="flex">
                             <div class="w-48 text-gray-500">Password</div>
-                            <div class="text-black font-medium">$2y$10$9Pq0QGMR89O1seC9Tw</div>
+                            <div class="text-black font-medium">{{ Str::limit($akun->password, 10, '...') }}</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-48 text-gray-500">Email</div>
+                            <div class="text-black font-medium">{{ $akun->karyawan->email }}</div>
                         </div>
                         <div class="flex">
                             <div class="w-48 text-gray-500">Tanggal Dibuat</div>
-                            <div class="text-black font-medium">08 Juli 2025</div>
+                            <div class="text-black font-medium">{{ \Carbon\Carbon::parse($akun->created_at)->format('d-m-Y') }}</div>
                         </div>
                         <div class="flex">
                             <div class="w-48 text-gray-500">Terakhir Diperbarui</div>
-                            <div class="text-black font-medium">10 Juli 2025</div>
+                            <div class="text-black font-medium">{{ \Carbon\Carbon::parse($akun->updated_at)->format('d-m-Y') }}</div>
                         </div>
                                         
                         <!--begin::Buttons-->
@@ -108,10 +112,10 @@
                                 Edit
                             </button>
                             <button class="flex gap-2 p-2.5 px-4 justify-center items-center border border-[#E21B1B] rounded-lg text-[#E21B1B] font-bold">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#E21B1B" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#E21B1B" class="size-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                                 </svg>
-                                Hapus
+                                Reset Password
                             </button>
                         </div>
                         <!--end::Buttons-->

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Mepro Visit</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    @vite(['resources/js/daftarKunjungan.js'])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -92,18 +92,9 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                 </svg>
-                                Unggah
+                                Unduh
                             </div>
                             <!--end::Export button-->
-                            
-                            <!--begin::Tambah kunjungan baru-->
-                            <a href="{{ route('kunjungan.tambahKunjungan') }}" class="flex gap-2 px-2 py-1 justify-center items-center bg-[#029C55] rounded-sm text-white font-bold shadow-sm cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                                Tambah Kunjungan Baru
-                            </a>
-                            <!--end::Tambah kunjungan baru-->
                         </div>
                         <!--end::Options-->
                     </div>
@@ -115,157 +106,176 @@
     </div>
     
 <script>
-    document.addEventListener("DOMContentLoaded", function(){
-        document.querySelectorAll("a").forEach(function (link){
-            link.addEventListener("click", function(e){
-                if(link.getAttribute("href") && link.getAttribute("href").charAt(0) !== "#"){
-                    document.getElementById("loadingOverlay").classList.remove("hidden");
-                }
-            })
-        })
-    });
+    // document.addEventListener("DOMContentLoaded", function(){
+    //     document.querySelectorAll("a").forEach(function (link){
+    //         link.addEventListener("click", function(e){
+    //             if(link.getAttribute("href") && link.getAttribute("href").charAt(0) !== "#"){
+    //                 document.getElementById("loadingOverlay").classList.remove("hidden");
+    //             }
+    //         })
+    //     })
+    // });
         
-    $(document).ready(function () {
-        // Inisialisasi DataTables
-        var visitorTable = $('#tableKunjungan').DataTable({
-            "aaSorting": [],
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "info": false,
-            "ordering": false,
-            "dom": 'lrtip',
-            "language": {
-                "zeroRecords": '<div class="text-center p-4 text-[#E21B1B] font-medium">Tidak ada data ditemukan</div>',
-                "emptyTable": '<div class="text-center p-4 text-gray-500">Belum ada data kunjungan</div>',
-                "paginate": {
-                    "previous": "< Sebelumnya",
-                    "next": "Selanjutnya >"
-                }
-            },
-            "drawCallback": function(){
-                stylePagination();
-                styleLengthDropdown();
-            }
-        });
+    // $(document).ready(function () {
+    //     var visitorTable = $('#tableKunjungan').DataTable({
+    //         "aaSorting": [],
+    //         "paging": true,
+    //         "lengthChange": false,
+    //         "searching": true,
+    //         "info": false,
+    //         "ordering": false,
+    //         "processing": true,
+    //         "serverSide": true,
+    //         "ajax": {
+    //             url: '{{ route("kunjungan.load") }}',
+    //             data: { mode: 'full' }                
+    //         },
+    //         "columns": [
+    //             { data: 'nama_tamu', name: 'nama_tamu' },
+    //             { data: 'instansi', name: 'instansi' },
+    //             { data: 'tanggal_kunjungan', name: 'tanggal_kunjungan' },
+    //             { data: 'waktu_kedatangan', name: 'waktu_kedatangan' },
+    //             { data: 'waktu_kepulangan', name: 'waktu_kepulangan' },
+    //             { data: 'pihak_tujuan', name: 'pihak_tujuan' },
+    //             { data: 'divisi', name: 'divisi' },
+    //             { data: 'status', name: 'status' },
+    //             { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
+    //         ],
+    //         "createdRow": function(row) {
+    //             $(row).addClass('bg-white border-b border-[#029C5525]');
+    //         },
+    //         "dom": 'lrtip',
+    //         "language": {
+    //             "zeroRecords": '<div class="text-center p-4 text-[#E21B1B] font-medium">Tidak ada data ditemukan</div>',
+    //             "emptyTable": '<div class="text-center p-4 text-gray-500">Belum ada data kunjungan</div>',
+    //             "paginate": {
+    //                 "previous": "< Sebelumnya",
+    //                 "next": "Selanjutnya >"
+    //             }
+    //         },
+    //         "drawCallback": function(){
+    //             stylePagination();
+    //             styleLengthDropdown();
+    //         }
+    //     });
 
-        // Hubungkan input pencarian ke DataTables
-        $('#searchKunjungan').on('keyup', function () {
-            visitorTable.search(this.value).draw();
-        }); 
+    //     // Hubungkan input pencarian ke DataTables
+    //     $('#searchKunjungan').on('keyup', function () {
+    //         visitorTable.search(this.value).draw();
+    //     }); 
 
-        // Hubungkan pagination
-        $('#dropdownEntriesMenu a').on('click', function (e) {
-            e.preventDefault();
+    //     // Hubungkan pagination
+    //     $('#dropdownEntriesMenu a').on('click', function (e) {
+    //         e.preventDefault();
 
-            const value = $(this).data('value');
+    //         const value = $(this).data('value');
 
-            // Update tampilan angka pada tombol
-            $('#selectedEntries').text(value);
+    //         // Update tampilan angka pada tombol
+    //         $('#selectedEntries').text(value);
 
-            // Ganti jumlah entri yang ditampilkan DataTables
-            visitorTable.page.len(value).draw();
-        });
+    //         // Ganti jumlah entri yang ditampilkan DataTables
+    //         visitorTable.page.len(value).draw();
+    //     });
         
-        styleLengthDropdown();
+    //     styleLengthDropdown();
         
-        document.addEventListener('click', function (e) {
-            const button = document.getElementById('filterButton');
-            const dropdown = document.getElementById('filterDropdown');
+    //     document.addEventListener('click', function (e) {
+    //         const button = document.getElementById('filterButton');
+    //         const dropdown = document.getElementById('filterDropdown');
 
-            if (!button.contains(e.target) && !dropdown.contains(e.target)) {
-                dropdown.classList.add('hidden');
-            }
-        });
+    //         if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+    //             dropdown.classList.add('hidden');
+    //         }
+    //     });
         
-        document.getElementById('applyFilter').addEventListener('click', function () {
-            const tanggalAwal = document.getElementById('tanggalAwal').value;
-            const tanggalAkhir = document.getElementById('tanggalAkhir').value;
-            const sortOrder = document.querySelector('input[name="sort"]:checked')?.value || "asc";
+    //     document.getElementById('applyFilter').addEventListener('click', function () {
+    //         const tanggalAwal = document.getElementById('tanggalAwal').value;
+    //         const tanggalAkhir = document.getElementById('tanggalAkhir').value;
+    //         const sortOrder = document.querySelector('input[name="sort"]:checked')?.value || "asc";
 
-            const rows = Array.from(document.querySelectorAll('#bodyKunjungan tr'));
+    //         const rows = Array.from(document.querySelectorAll('#bodyKunjungan tr'));
 
-            // Filter tanggal
-            rows.forEach(row => {
-                const tanggal = row.cells[1].textContent.trim();
-                let show = true;
+    //         // Filter tanggal
+    //         rows.forEach(row => {
+    //             const tanggal = row.cells[1].textContent.trim();
+    //             let show = true;
 
-                if (tanggalAwal && tanggal < tanggalAwal) show = false;
-                if (tanggalAkhir && tanggal > tanggalAkhir) show = false;
+    //             if (tanggalAwal && tanggal < tanggalAwal) show = false;
+    //             if (tanggalAkhir && tanggal > tanggalAkhir) show = false;
 
-                row.style.display = show ? '' : 'none';
-            });
+    //             row.style.display = show ? '' : 'none';
+    //         });
 
-            // Sorting
-            const visibleRows = rows.filter(row => row.style.display !== 'none');
-            visibleRows.sort((a, b) => {
-                const namaA = a.cells[0].textContent.trim().toLowerCase();
-                const namaB = b.cells[0].textContent.trim().toLowerCase();
-                return sortOrder === 'asc' ? namaA.localeCompare(namaB) : namaB.localeCompare(namaA);
-            });
+    //         // Sorting
+    //         const visibleRows = rows.filter(row => row.style.display !== 'none');
+    //         visibleRows.sort((a, b) => {
+    //             const namaA = a.cells[0].textContent.trim().toLowerCase();
+    //             const namaB = b.cells[0].textContent.trim().toLowerCase();
+    //             return sortOrder === 'asc' ? namaA.localeCompare(namaB) : namaB.localeCompare(namaA);
+    //         });
 
-            // Masukkan kembali ke tbody
-            const tbody = document.getElementById('#bodyKunjungan');
-            visibleRows.forEach(row => tbody.appendChild(row));
-        });
+    //         // Masukkan kembali ke tbody
+    //         const tbody = document.getElementById('#bodyKunjungan');
+    //         visibleRows.forEach(row => tbody.appendChild(row));
+    //     });
         
-        $('#filterForm button:contains("Hapus")').on('click', function () {
-            $('#tanggalAwal').val('');
-            $('#tanggalAkhir').val('');
-            $('input[name="sort"]').prop('checked', false);
+    //     $('#filterForm button:contains("Hapus")').on('click', function () {
+    //         $('#tanggalAwal').val('');
+    //         $('#tanggalAkhir').val('');
+    //         $('input[name="sort"]').prop('checked', false);
 
-            $.fn.dataTable.ext.search = [];
-            visitorTable.order([]).draw();
-        });
-    });
+    //         $.fn.dataTable.ext.search = [];
+    //         visitorTable.order([]).draw();
+    //     });
+    // });
     
-    function stylePagination() {
-    setTimeout(() => {
-        const pagination = document.querySelector('.dataTables_paginate');
-        if (!pagination) return;
+    // function stylePagination() {
+    // setTimeout(() => {
+    //     const pagination = document.querySelector('.dataTables_paginate');
+    //     if (!pagination) return;
 
-        pagination.classList.add('flex', 'gap-2', 'mt-5', 'justify-between', 'items-center', 'text-sm', 'cursor-pointer');
+    //     pagination.classList.add('flex', 'gap-2', 'mt-5', 'justify-between', 'items-center', 'text-sm', 'cursor-pointer');
 
-        const pageLinks = pagination.querySelectorAll('a');
-        pageLinks.forEach(link => {
-            link.classList.add(
-                'px-3', 'py-1', 'rounded-md', 'hover:bg-[#E8F5EC]',
-                'text-gray-700', 'transition', 'duration-200', 'cursor-pointer'
-            );
-        });
+    //     const pageLinks = pagination.querySelectorAll('a');
+    //     pageLinks.forEach(link => {
+    //         link.classList.add(
+    //             'px-3', 'py-1', 'rounded-md', 'hover:bg-[#E8F5EC]',
+    //             'text-gray-700', 'transition', 'duration-200', 'cursor-pointer'
+    //         );
+    //     });
 
-        const active = pagination.querySelector('.current');
-        if (active) {
-            active.classList.remove('current');
-            active.classList.add('bg-[#029C55]', 'text-white', 'font-semibold');
-        }
-    }, 0);
-    }
+    //     const active = pagination.querySelector('.current');
+    //     if (active) {
+    //         active.classList.remove('current');
+    //         active.classList.add('bg-[#029C55]', 'text-white', 'font-semibold');
+    //     }
+    // }, 0);
+    // }
     
-    function styleLengthDropdown() {
-    setTimeout(() => {
-        const wrapper = document.querySelector('.dataTables_length');
-        if (!wrapper) return;
+    // function styleLengthDropdown() {
+    // setTimeout(() => {
+    //     const wrapper = document.querySelector('.dataTables_length');
+    //     if (!wrapper) return;
 
-        wrapper.classList.add('flex', 'items-center', 'gap-2', 'text-sm', 'text-gray-700');
+    //     wrapper.classList.add('flex', 'items-center', 'gap-2', 'text-sm', 'text-gray-700');
 
-        const label = wrapper.querySelector('label');
-        if (label) label.classList.add('flex', 'items-center', 'gap-2');
+    //     const label = wrapper.querySelector('label');
+    //     if (label) label.classList.add('flex', 'items-center', 'gap-2');
 
-        const select = wrapper.querySelector('select');
-        if (select) {
-            select.classList.add(
-                'py-1.5', 'px-3', 'border', 'border-gray-300', 'rounded-md',
-                'text-sm', 'text-green-700', 'focus:outline-none', 'focus:ring-2', 'focus:ring-[#029c55]-500'
-            );
-        }
-    }, 0);
-    }
+    //     const select = wrapper.querySelector('select');
+    //     if (select) {
+    //         select.classList.add(
+    //             'py-1.5', 'px-3', 'border', 'border-gray-300', 'rounded-md',
+    //             'text-sm', 'text-green-700', 'focus:outline-none', 'focus:ring-2', 'focus:ring-[#029c55]-500'
+    //         );
+    //     }
+    // }, 0);
+    // }
     
-    function toggleFilter(){
-        const notification = document.getElementById('filterDropdown');
-        notification.classList.toggle('hidden');
-    }
+    // function toggleFilter(){
+    //     const notification = document.getElementById('filterDropdown');
+    //     notification.classList.toggle('hidden');
+    // }
 </script>
 
 </body>

@@ -1,37 +1,99 @@
-export function showModal({ title, message, type, onConfirm = null }) {
-    const modal = document.getElementById("universalModal");
-    const titleEl = document.getElementById("modalTitle");
-    const messageEl = document.getElementById("modalMessage");
-    const buttonsEl = document.getElementById("modalButtons");
+(function () {
+    const modal = document.getElementById('modalMain');
+    const icon = document.getElementById('modalMainIcon');
+    const title = document.getElementById('modalMainTitle');
+    const message = document.getElementById('modalMainMessage');
 
-    titleEl.textContent = title;
-    messageEl.textContent = message;
-    buttonsEl.innerHTML = "";
+    const btnYakin = document.getElementById('btnYakin');
+    const btnSuccess = document.getElementById('btnSuccess');
+    const btnWarnY = document.getElementById('btnWarningYellow');
+    const btnWarnR = document.getElementById('btnWarningRed');
 
-    if (type === "confirm") {
-        const cancelBtn = document.createElement("button");
-        cancelBtn.textContent = "Batal";
-        cancelBtn.className = "px-4 py-2 bg-gray-200 rounded";
-        cancelBtn.onclick = () => modal.classList.add("hidden");
+    const modalLoad = document.getElementById('modalLoad');
 
-        const okBtn = document.createElement("button");
-        okBtn.textContent = "Ya, Lanjutkan";
-        okBtn.className = "px-4 py-2 bg-red-600 text-white rounded";
-        okBtn.onclick = () => {
-            modal.classList.add("hidden");
-            if (onConfirm) onConfirm();
-        };
+    const VARIANT_COLOR = {
+        info: 'text-gray-500',
+        success: 'text-[#029C55]',
+        warning: 'text-[#FDE047]',
+        danger: 'text-[#E21B1B]'
+    };
 
-        buttonsEl.appendChild(cancelBtn);
-        buttonsEl.appendChild(okBtn);
-    } else {
-        const closeBtn = document.createElement("button");
-        closeBtn.textContent = "OK";
-        closeBtn.className = "px-4 py-2 bg-green-600 text-white rounded";
-        closeBtn.onclick = () => modal.classList.add("hidden");
+    function resetButtons() {
+        [btnYakin, btnSuccess, btnWarnY, btnWarnR].forEach(b => {
+            b.classList.add('hidden');
 
-        buttonsEl.appendChild(closeBtn);
+            const clone = b.cloneNode(true);
+            b.replaceWith(clone);
+        });
     }
 
-    modal.classList.remove("hidden");
-}
+    function setIconColor(variant) {
+        icon.classList.remove(...Object.values(VARIANT_COLOR));
+        icon.classList.add(VARIANT_COLOR[variant] | VARIANT_COLOR.info);
+    }
+
+    window.openModal = function ({
+        variant = 'info',
+        titleText = 'Judul Modal',
+        messageText = 'Pesan modal',
+        show = [],
+        onYakin = null,
+        onSuccess = null,
+        onWarnYellow = null,
+        onWarnRed = null,
+    } = {}) {
+        setIconColor(variant);
+        title.textContent = titleText;
+        message.textContent = messageText;
+
+        resetButtons();
+
+        show.forEach(key => {
+            if (key === 'yakin') {
+                const b = document.getElementById('btnYakin');
+                b.classList.remove('hidden');
+                if (onYakin) b.addEventListener('click', onYakin);
+            }
+
+            if (key === 'success') {
+                const b = document.getElementById('btnSuccess');
+                b.classList.remove('hidden');
+                if (onSuccess) b.addEventListener('click', onSuccess);
+            }
+
+            if (key === 'warnYellow') {
+                const b = document.getElementById('btnWarnYellow');
+                b.classList.remove('hidden');
+                if (onWarnYellow) b.addEventListener('click', onWarnYellow);
+            }
+
+            if (key === 'warnRed') {
+                const b = document.getElementById('btnWarnRed');
+                b.classList.remove('hidden');
+                if (onWarnRed) b.addEventListener('click', onWarnRed);
+            }
+        });
+
+        document.getElementById('btnSuccess').addEventListener('click', closeModal);
+
+        modal.classList.remove('hidden');
+    };
+
+    window.closeModal = function () {
+        modal.classList.add('hidden');
+    };
+
+    window.showLoadModal = function (titleText = 'Menyimpan Data...', messageText = 'Mohon tunggu sebentar...') {
+        document.getElementById('modalLoadTitle').textContent = titleText;
+        document.getElementById('modalLoadMessage').textContent = messageText;
+        modalLoad.classList.remove('hidden');
+    };
+
+    window.hideLoadModal = function () {
+        modalLoad.classList.add('hidden');
+    };
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+})();

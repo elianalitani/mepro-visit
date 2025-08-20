@@ -83,14 +83,15 @@
                             <!--begin::Kunjungan dibatalkan-->
                             <div class="flex flex-col w-full gap-2 p-5 justify-around bg-white rounded-lg shadow-sm">
                                 <div class="flex flex-row gap-2 items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#e21b1b" class="p-1 bg-[#fbe8e8] rounded-full size-8">
-                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd" />
+                                    <svg class="p-1 bg-[#FBF1E8] rounded-full size-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FBF1E8" viewBox="0 0 24 24">
+                                        <path stroke="#F97316" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3M3.22302 14C4.13247 18.008 7.71683 21 12 21c4.9706 0 9-4.0294 9-9 0-4.97056-4.0294-9-9-9-3.72916 0-6.92858 2.26806-8.29409 5.5M7 9H3V5"/>
                                     </svg>
-                                    <span class="text-md text-gray-500 font-bold">Dibatalkan</span>
+
+                                    <span class="text-md text-gray-500 font-bold">Sudah bertemu</span>
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="text-3xl font-bold">50</span>
-                                    <span class="p-1 bg-[#fbe8e8] rounded-full text-xs sm:text-sm text-[#e21b1b]">
+                                    <span class="p-1 bg-[#FBF1E8] rounded-full text-xs sm:text-sm text-[#F97316]">
                                         <span class="font-bold">+2</span>
                                         <span>dari hari kemarin</span>
                                 </div>
@@ -100,16 +101,20 @@
                         <!---end::Statistik-->
                         
                         <!--begin::Grafik dan top kunjungan-->
-                        <div class="flex flex-col md:flex-row gap-3">
+                        <div class="flex flex-col sm:grid sm:grid-cols-2 gap-3 items-stretch">
                             <!--begin::Grafik-->
-                            <span class="flex-wrap w-screen mt-10 text-md font-bold cursor-default block sm:hidden">Kunjungan PT Meprofarm Pharmaceutical Industries | <span>2024</span></span>
-                            <div class="flex-[2] w-screen sm:w-full h-[100px] sm:h-fit min-w-0 overflow-auto p-4 mt-2 sm:mt-10 bg-white rounded-xl shadow-sm ">
+                            <span class="flex-wrap w-screen mt-10 text-md font-bold cursor-default block sm:hidden">Kunjungan PT Meprofarm Pharmaceutical Industries | 
+                                <span class="chart-year-label">{{ $defaultYear }}</span>
+                            </span>
+                            <div class="flex-[2] w-screen sm:w-full min-w-0 overflow-auto p-4 mt-2 sm:mt-10 bg-white rounded-xl shadow-sm ">
                                 <!--begin::Header-->    
                                 <div class="flex flex-row p-4 justify-between">
-                                    <span class="flex-wrap text-md font-bold cursor-default hidden sm:block">Kunjungan PT Meprofarm Pharmaceutical Industries | <span>2024</span></span>
+                                    <span class="flex-wrap text-md font-bold cursor-default hidden sm:block">Kunjungan PT Meprofarm Pharmaceutical Industries | 
+                                        <span class="chart-year-label">{{ $defaultYear }}</span>
+                                    </span>
 
                                     <!--begin::Dropdown tahun-->
-                                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownTahun" class="flex px-3 justify-center items-center bg-[#eefbe8] rounded-full cursor-pointer" type="button">
+                                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownTahun" class="flex px-3 justify-center items-center bg-[#eefbe8] rounded-full text-sm cursor-pointer" type="button">
                                         Tahun    
                                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -141,14 +146,14 @@
                             <!--end::Grafik-->
                             
                             <!--begin::Top kunjungan-->
-                            <div class="flex-[1] w-screen sm:w-full min-w-0 h-fit mt-10 overflow-hidden p-4 bg-white rounded-xl shadow-sm cursor-default">
+                            <div class="flex-[2] w-full min-w-0 mt-10 overflow-hidden p-4 bg-white rounded-xl shadow-sm cursor-default">
                                 <!--begin::Header-->    
                                 <div class="flex flex-row p-4 justify-between">
                                     <span class="text-md font-bold">Top 10 Kunjungan</span>
                                 </div>
                                 <!--end::Header--> 
                                 <!--begin::Table-->
-                                <table class="table-auto w-full text-sm sm:text-base">
+                                <table id="tableTopKunjungan" class="tabl-auto w-full text-sm sm:text-base">
                                     <thead>
                                         <tr class="border-b border-[#029C5525] text-gray-500 text-center">
                                             <th>Rank</th>
@@ -156,18 +161,6 @@
                                             <th>Jumlah</th>
                                         </tr>
                                     </thead>
-                                    <tbody clas="text-left">
-                                        <tr class="bg-white">
-                                            <td class="px-4 py-3 text-center">#1</td>
-                                            <td class="px-4 py-3">PT Telkom Indonesia</td>
-                                            <td class="px-4 py-3 text-center">50</td>
-                                        </tr>
-                                        <tr class="bg-white">
-                                            <td class="px-4 py-3 text-center">#2</td>
-                                            <td class="px-4 py-3">Universitas Katolik Parahyangan</td>
-                                            <td class="px-4 py-3 text-center">40</td>
-                                        </tr>
-                                    </tbody>
                                 </table>
                                 <!--end::Table-->
                             </div>
@@ -193,14 +186,53 @@
     });
     
     $(document).ready(function () {
-        // Inisialisasi DataTables
         var visitorTable = $('#tableKunjungan').DataTable({
             "aaSorting": [],
             "paging": false,
             "searching": false,
             "info": false,
-            "ordering": false
+            "ordering": false,
+            "processing": true,
+            "serverSide": false,
+            "ajax": {
+                url: '{{ route("kunjungan.load") }}',
+                data: { mode: 'dashboard' }
+            },
+            "columns": [
+                { data: 'nama_tamu', name: 'nama_tamu' },
+                { data: 'instansi', name: 'instansi' },
+                { data: 'tanggal_kunjungan', name: 'tanggal_kunjungan' },
+                { data: 'waktu_kedatangan', name: 'waktu_kedatangan' },
+                { data: 'waktu_kepulangan', name: 'waktu_kepulangan' },
+                { data: 'pihak_tujuan', name: 'pihak_tujuan' },
+                { data: 'divisi', name: 'divisi' },
+                { data: 'status', name: 'status' },
+            ],
+            "createdRow": function(row) {
+                $(row).addClass('bg-white border-b border-[#029C5525]');
+            }
         });
+        
+        var topKunjunganTable = $('#tableTopKunjungan').DataTable({
+            "aaSorting": [],
+            "paging": false,
+            "searching": false,
+            "info": false,
+            "ordering": false,
+            "processing": true,
+            "serverSide": false,
+            "ajax": {
+                url: '{{ route("topKunjungan.load") }}'
+            },
+            "columns": [
+                { data: 'DT_RowIndex', render: data => `#${data}` },
+                { data: 'instansi', name: 'instansi' },
+                { data: 'total', name: 'total' }
+            ],
+            "createdRow": function(row) {
+                $(row).addClass('bg-white text-center');
+            }
+        })
 
         // Hubungkan input pencarian ke DataTables
         $('#searchKunjungan').on('keyup', function () {
@@ -209,14 +241,13 @@
         
         // Graf kunjungan per tahun
         const ctx = document.getElementById('myChart');
-
-        new Chart(ctx, {
+        let myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 datasets: [{
                     label: 'Jumlah Kunjungan',
-                    data: [55, 49, 44, 24, 15, 90, 25, 12, 42, 35, 11, 21],
+                    data: @json($monthlyData),
                     backgroundColor: '#029C55',
                     borderRadius: 10
                 }]
@@ -229,17 +260,32 @@
                     title: { display: false }
                 },
                 scales: {
-                    x: {
-                        grid: { display: false }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        grid: { display: false }
-                    }
+                    x: { grid: { display: false } },
+                    y: { beginAtZero: true,
+                         grid: { display: false }
+                       }
                 }
             }
-        }); 
         });
+
+        document.querySelectorAll('#dropdownTahun a').forEach(function(el){
+            el.addEventListener('click', function(e){
+                e.preventDefault();
+                let selectedYear = this.textContent.trim();
+                
+                document.querySelectorAll('.chart-year-label').forEach(span =>{
+                    span.textContent = selectedYear;
+                });
+                
+                fetch(`/kunjungan/chart/${selectedYear}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        myChart.data.datasets[0].data = data;
+                        myChart.update();
+                    });
+            });
+        });
+    });
 </script>
 
 </body>

@@ -8,7 +8,19 @@
 <body class="w-full max-h-screen h-fit sm:min-h-screen">
     <!--begin::Header-->
     <div id="header" class="flex flex-row flex-wrap gap-2 sm:gap-4 p-3 w-full justify-center sm:justify-between items-center bg-white transition-all duration-300">    
-        <div class="font-bold text-sm sm:text-base lg:text-lg hidden sm:block">Dashboard</div>
+        <div class="font-bold text-sm sm:text-base lg:text-lg hidden sm:block">
+            @php
+                $titles = [
+                    'kunjungan.index' => 'Kunjungan',
+                    'akun.index' => 'Pengaturan Akun',
+                    'dashboard' => 'Dashboard',
+                ];
+
+                $routeName = Route::currentRouteName();
+            @endphp
+
+            {{ $titles[$routeName] ?? 'Dashboard' }}
+        </div>
         
         <!--begin::Search bar-->
         <div class="flex-1 flex max-w-[150px] sm:max-w-none sm:w-auto justify-center order-1 sm:order-none">
@@ -20,6 +32,18 @@
             </div>
         </div>
         <!--end::Search bar-->
+        
+        <!--begin::Toggle button-->
+        @if(session('role') === 'Resepsionis')
+        <label class="inline-flex items-center me-5 cursor-pointer">
+            <input id="toggleCheckbox" type="checkbox" value="" class="sr-only peer" onchange="toggleTambahKunjungan()">
+            <div class="relative justify-center items-center w-20 h-8 bg-gray-200 rounded-full 
+            peer peer-checked:after:translate-x-[48px] rtl:peer-checked:after:-translate-x-[48px]
+            peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white
+            after:border-gray-300 after:rounded-full after:h-7 after:w-7 after:transition-all peer-checked:bg-[#029C55]"></div>
+        </label>
+        @endif
+        <!--end::Toggle button-->
         
         <!--begin::Notification-->
         @if(session('role') === 'Satpam' || session('role') === 'Resepsionis')
@@ -72,6 +96,17 @@
             dropdown.classList.add('hidden');
         }
     });
+    
+    function toggleTambahKunjungan(){
+        const tambahButton = document.getElementById('tambahKunjungan');
+        const toggleButton = document.getElementById('toggleCheckbox');
+        
+        if(toggleButton.checked){
+            tambahButton.classList.remove('hidden');   
+        }else{
+            tambahButton.classList.add('hidden');
+        }
+    }
 </script>
 </body>
 </html>

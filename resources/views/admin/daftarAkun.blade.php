@@ -114,13 +114,31 @@
     
     $(document).ready(function () {
         // Inisialisasi DataTables
-        var visitorTable = $('#tableKunjungan').DataTable({
+        var visitorTable = $('#tableAkun').DataTable({
             "aaSorting": [],
             "paging": true,
             "lengthChange": false,
             "searching": true,
             "info": false,
             "ordering": false,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: '{{ route("akun.load") }}',
+                data: { mode: 'full' }                
+            },
+            "columns": [
+                { data: 'DT_RowIndex', render: data => `${data}`, className: 'text-center', orderable: false, searchable: false },
+                { data: 'nama_karyawan', name: 'nama_karyawan' },
+                { data: 'role', name: 'role' },
+                { data: 'created_at', name: 'created_at', orderable: false, searchable: false },
+                { data: 'updated_at', name: 'updated_at', orderable: false, searchable: false },
+                { data: 'status', name: 'status', orderable: false, searchable: false },
+                { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
+            ],
+            "createdRow": function(row) {
+                $(row).addClass('bg-white border-b border-[#029C5525]');
+            },
             "dom": 'lrtip',
             "language": {
                 "zeroRecords": '<div class="text-center p-4 text-[#E21B1B] font-medium">Tidak ada data ditemukan</div>',

@@ -18,7 +18,7 @@ class LoginController extends Controller
         $credentials = $request->only('username', 'password');
         
         $user = User::where('username', $credentials['username'])
-                    ->where('show_is', true)
+                    ->where('is_deleted', false)
                     ->first();
                     
         if($user && Hash::check($credentials['password'], $user->password)){

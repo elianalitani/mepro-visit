@@ -15,7 +15,6 @@ class Notifikasi extends Model
         'id',
         'dibaca',
         'waktu_notifikasi',
-        'ttd_status',
         'create_by',
         'id_kunjungan'
     ];
@@ -23,4 +22,9 @@ class Notifikasi extends Model
     protected $hidden = [
         
     ];
+
+    public function kunjungan()
+    {
+        return $this->belongsTo(Kunjungan::class, 'id_kunjungan', 'id_kunjungan');
+    }
 }

@@ -19,6 +19,38 @@
                 <!--end::Content-->
             </div>
             <!--end::Filter tanggal-->
+
+            <!--begin::Filter status-->
+            <div class="bg-white">
+                <div class="bg-[#029C55] p-1 text-white font-bold text-center border-[#2d2d2b25]">    
+                    Status
+                </div>
+                <!--begin::Content-->
+                <div class=" justify-around items-center p-4 text-sm font-medium">
+                    <!--begin::Entry dropdown -->
+                    <div class="flex gap-2 items-center text-sm">
+                        <button id="dropdownStatusButton" data-dropdown-toggle="dropdownStatusMenu" class="flex w-full px-2 py-1 justify-between items-center rounded-sm cursor-pointer" type="button">
+                        <span id="selectedStatus">Pilih status</span>
+                            <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+
+                        <div id="dropdownStatusMenu" class="z-10 hidden divide-y divide-gray-100 bg-white rounded-lg shadow-sm cursor-pointer hidden">
+                            <ul class="py-2 text-sm" aria-labelledby="dropdownStatusButton">
+                                <li><a class="block px-4 py-2 hover:bg-[#eefbe8]" data-value="Selesai">Selesai</a></li>
+                                <li><a class="block px-4 py-2 hover:bg-[#eefbe8]" data-value="Sudah bertemu">Sudah bertemu</a></li>
+                                <li><a class="block px-4 py-2 hover:bg-[#eefbe8]" data-value="Sedang berlangsung">Sedang berlangsung</a></li>
+                                <li><a class="block px-4 py-2 hover:bg-[#eefbe8]" data-value="Menunggu">Menunggu</a></li>
+                                <li><a class="block px-4 py-2 hover:bg-[#eefbe8]" data-value="Dibatalkan">Dibatalkan</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end::Entry dropdown-->
+                </div>
+                <!--end::Content-->
+            </div>
+            <!--end::Filter status-->
             
             <!--begin::Filter alphabetical-->
             <div class="bg-white">
@@ -55,7 +87,7 @@
             
             <div class="flex items-center justify-center gap-2 p-2 bg-white text-center text-sm">
                 <button id="applyFilter" class="flex px-3 py-1 rounded-lg border border-[#029C55] text-[#029C55] cursor-pointer">Terapkan</button>
-                <button class="flex px-3 py-1 rounded-lg border border-[#E21B1B] text-[#E21B1B] cursor-pointer">Hapus</button>
+                <button id="resetFilter" class="flex px-3 py-1 rounded-lg border border-[#E21B1B] text-[#E21B1B] cursor-pointer">Hapus</button>
             </div>
         </div>
     </div>

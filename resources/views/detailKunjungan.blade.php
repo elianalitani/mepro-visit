@@ -9,10 +9,14 @@
     <link href="https://unpkg.com/flowbite@latest/dist/flowbite.min.css" />
 </head>
 <body class="min-h-screen bg-[#E8F5EC] overflow-x-hidden">
+
+    @include('components.modal')
+
     <!--begin::Loading-->
     <div id="loadingOverlay" class="hidden fixed inset-0 flex z-99 w-screen justify-center items-center">
         @include('components.loading')
     </div>
+
     <!--end::Loading-->
     <div id="layout" class="flex">
         @include('components.sidebar')
@@ -153,33 +157,39 @@
                         </div>
                         <div class="flex flex-col sm:flex-row">
                             <div class="w-48 text-gray-500">Waktu Modifikasi</div>
-                            <div class="text-black font-medium">{{ $kunjungan->waktu_kepulangan ? $kunjungan->waktu_kepulangan->format('H:i') : '-' }}</div>
+                            <div class="text-black font-medium">{{ optional($kunjungan->updated_at ? \Carbon\Carbon::parse($kunjungan->updated_at) : null)->format('H:i') ?? '-' }}</div>
                         </div>
                         <div class="flex flex-col sm:flex-row">
                             <div class="w-48 text-gray-500">Waktu Kepulangan</div>
-                            <div class="text-black font-medium">{{ $kunjungan->waktu_kepulangan ? $kunjungan->waktu_kepulangan->format('H:i') : '-' }}</div>
+                            <div class="text-black font-medium">{{ optional($kunjungan->waktu_kepulangan ? \Carbon\Carbon::parse($kunjungan->waktu_kepulangan) : null)->format('H:i') ?? '-' }}</div>
                         </div>
                         
                         <!--begin::Buttons-->
                         <div class="flex flex-wrap gap-2 justify-end items-end text-sm">
-                            @if(session('role') === 'Satpam')
-                            <button onclick=selesaiKunjungan() class="flex gap-2 p-2.5 px-3 sm:px-4 justify-center items-center bg-[#029C55] rounded-lg text-xs sm:text-sm text-white font-bold cursor-pointer">
-                                Selesai
-                            </button>
+                            @if(session('role') === 'Satpam' && in_array($kunjungan->status, ['Menunggu', 'Sedang berlangsung', 'Sudah bertemu']))                          
+                            <!--begin::Form ganti status menjadi selesai-->
+                            <form id="formSelesai" action="{{ route('kunjungan.selesai', $kunjungan->id_kunjungan) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="selesai-kunjungan flex gap-2 p-2.5 px-3 sm:px-4 justify-center items-center bg-[#029C55] rounded-lg text-xs sm:text-sm text-white font-bold cursor-pointer">
+                                    Selesai
+                                </button>
+                                @method('PATCH')
+                            </form>
+                            <!--end::Form ganti status menjadi selesai-->
                             @endif
-                            
-                            <button class="flex gap-2 p-2.5 px-3 sm:px-4 justify-center items-center border border-[#029C55] rounded-lg text-xs sm:text-sm text-[#029C55] font-bold cursor-pointer">
-                                Kembali
-                            </button>
-                            
-                            @if(session('role') === 'Satpam')
-                            <button class="flex gap-2 p-2.5 px-3 sm:px-4 justify-center items-center border border-[#029C55] rounded-lg text-xs sm:text-sm text-[#029C55] font-bold cursor-pointer">
+
+                            @if(session('role') === 'Satpam' && in_array($kunjungan->status, ['Menunggu', 'Sedang berlangsung', 'Sudah bertemu']))
+                            <a href="{{ route('kunjungan.edit', $kunjungan->id_kunjungan) }}" class="flex gap-2 p-2.5 px-3 sm:px-4 justify-center items-center border border-[#029C55] rounded-lg text-xs sm:text-sm text-[#029C55] font-bold cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                 </svg>
                                 Edit
-                            </button>
+                            </a>
                             @endif
+
+                            <a href="{{ route('kunjungan.index') }}" class="flex gap-2 p-2.5 px-3 sm:px-4 justify-center items-center border border-[#029C55] rounded-lg text-xs sm:text-sm text-[#029C55] font-bold cursor-pointer">
+                                Kembali
+                            </a>
                         </div>
                         <!--end::Buttons-->
                     </div>          
@@ -191,29 +201,6 @@
         </div>
     </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-        document.querySelectorAll("a").forEach(function (link){
-            link.addEventListener("click", function(e){
-                if(link.getAttribute("href") && link.getAttribute("href").charAt(0) !== "#"){
-                    document.getElementById("loadingOverlay").classList.remove("hidden");
-                }
-            })
-        })
-    });
-    
-    function selesaiKunjungan() {
-        const box = document.getElementById("statusBox");
-        box.innerText = "Selesai";
-        
-        box.className = box.className
-        .replace(/border-\[[^\]]+\]/g, "")
-        .replace(/text-\[[^\]]+\]/g, "")
-        .trim();
-        
-        box.classList.add("border-[#029C55]", "text-[#029C55]");
-    }
-</script>
-
+    @vite(['resources/js/modal.js', 'resources/js/detailKunjungan.js'])
 </body>
 </html>

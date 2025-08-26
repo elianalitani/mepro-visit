@@ -11,6 +11,7 @@
     <link href="https://unpkg.com/flowbite@latest/dist/flowbite.min.css" />
 </head>
 <body class="min-h-screen bg-[#E8F5EC] overflow-x-hidden">
+    @include('components.modal')
     <!--begin::Loading-->
     <div id="loadingOverlay" class="hidden fixed inset-0 flex z-99 w-screen justify-center items-center">
         @include('components.loading')
@@ -104,19 +105,22 @@
                                         
                         <!--begin::Buttons-->
                         <div class="flex w-full gap-2 justify-end items-end text-sm">
-                            <button class="flex gap-2 p-2.5 px-4 justify-center items-center bg-[#029C55] rounded-lg text-white font-bold">
+                            <a href="{{ route('akun.editAkun', $akun->id_user) }}" class="flex gap-2 p-2.5 px-4 justify-center items-center bg-[#029C55] rounded-lg text-white font-bold">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-4">
                                     <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
                                     <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                                 </svg>
                                 Edit
-                            </button>
-                            <button class="flex gap-2 p-2.5 px-4 justify-center items-center border border-[#E21B1B] rounded-lg text-[#E21B1B] font-bold">
+                            </a>
+                            <a href="javascript:void(0)" 
+                                class="btn-reset-akun flex gap-2 p-2.5 px-4 justify-center items-center border border-[#E21B1B] rounded-lg text-[#E21B1B] font-bold"
+                                data-id="{{ $akun->id_user }}"
+                                data-email="{{ $akun->karyawan->email ?? '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#E21B1B" class="size-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                                 </svg>
                                 Reset Password
-                            </button>
+                            </a>
                         </div>
                         <!--end::Buttons-->
                     </div>          
@@ -128,34 +132,7 @@
         </div>
     </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-        document.querySelectorAll("a").forEach(function (link){
-            link.addEventListener("click", function(e){
-                if(link.getAttribute("href") && link.getAttribute("href").charAt(0) !== "#"){
-                    document.getElementById("loadingOverlay").classList.remove("hidden");
-                }
-            })
-        })
-    });
-    
-    document.querySelectorAll('[data-hs-toggle-password]').forEach(button => {
-        const targetSelector = JSON.parse(button.getAttribute('data-hs-toggle-password')).target;
-        const input = document.querySelector(targetSelector);
 
-        button.addEventListener('click', () => {
-        const isPassword = input.type === 'password';
-        input.type = isPassword ? 'text' : 'password';
-        
-        button.querySelectorAll('.hs-password-active\\:hidden, .hs-password-active\\:block, .hs-confirmPassword-active\\:hidden, .hs-confirmPassword-active\\:block').forEach(el => {
-            el.classList.toggle('hidden');
-            el.classList.toggle('block');
-        });
-        });
-    });
-</script>
-
-
-
+@vite(['resources/js/modal.js', 'resources/js/daftarAkun.js'])
 </body>
 </html>

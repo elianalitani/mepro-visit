@@ -1,26 +1,27 @@
 (function () {
-    const modal = document.getElementById('modalMain');
-    const icon = document.getElementById('modalMainIcon');
-    const title = document.getElementById('modalMainTitle');
-    const message = document.getElementById('modalMainMessage');
+    const modal = document.getElementById("modalMain");
+    const title = document.getElementById("modalMainTitle");
+    const message = document.getElementById("modalMainMessage");
 
-    const btnYakin = document.getElementById('btnYakin');
-    const btnSuccess = document.getElementById('btnSuccess');
-    const btnWarnY = document.getElementById('btnWarningYellow');
-    const btnWarnR = document.getElementById('btnWarningRed');
+    const btnYakin = document.getElementById("btnYakin");
+    const btnSuccess = document.getElementById("btnSuccess");
+    const btnWarnY = document.getElementById("btnWarnYellow");
+    const btnWarnR = document.getElementById("btnWarnRed");
 
-    const modalLoad = document.getElementById('modalLoad');
+    const modalLoad = document.getElementById("modalLoad");
+    const modalReset = document.getElementById("resetModal");
+    const modalConfirm = document.getElementById("modalConfirm");
 
     const VARIANT_COLOR = {
-        info: 'text-gray-500',
-        success: 'text-[#029C55]',
-        warning: 'text-[#FDE047]',
-        danger: 'text-[#E21B1B]'
+        info: "text-gray-500",
+        success: "text-[#029C55]",
+        warning: "text-[#FDE047]",
+        danger: "text-[#E21B1B]",
     };
 
     function resetButtons() {
-        [btnYakin, btnSuccess, btnWarnY, btnWarnR].forEach(b => {
-            b.classList.add('hidden');
+        [btnYakin, btnSuccess, btnWarnY, btnWarnR].forEach((b) => {
+            b.classList.add("hidden");
 
             const clone = b.cloneNode(true);
             b.replaceWith(clone);
@@ -28,14 +29,16 @@
     }
 
     function setIconColor(variant) {
+        const icon = document.querySelector("#modalMainIcon svg");
+
         icon.classList.remove(...Object.values(VARIANT_COLOR));
-        icon.classList.add(VARIANT_COLOR[variant] | VARIANT_COLOR.info);
+        icon.classList.add(VARIANT_COLOR[variant] || VARIANT_COLOR.info);
     }
 
     window.openModal = function ({
-        variant = 'info',
-        titleText = 'Judul Modal',
-        messageText = 'Pesan modal',
+        variant = "info",
+        titleText = "Judul Modal",
+        messageText = "Pesan modal",
         show = [],
         onYakin = null,
         onSuccess = null,
@@ -48,52 +51,104 @@
 
         resetButtons();
 
-        show.forEach(key => {
-            if (key === 'yakin') {
-                const b = document.getElementById('btnYakin');
-                b.classList.remove('hidden');
-                if (onYakin) b.addEventListener('click', onYakin);
+        show.forEach((key) => {
+            if (key === "yakin") {
+                const b = document.getElementById("btnYakin");
+                b.classList.remove("hidden");
+                if (onYakin) b.addEventListener("click", onYakin);
             }
 
-            if (key === 'success') {
-                const b = document.getElementById('btnSuccess');
-                b.classList.remove('hidden');
-                if (onSuccess) b.addEventListener('click', onSuccess);
+            if (key === "success") {
+                const b = document.getElementById("btnSuccess");
+                b.classList.remove("hidden");
+                if (onSuccess) b.addEventListener("click", onSuccess);
             }
 
-            if (key === 'warnYellow') {
-                const b = document.getElementById('btnWarnYellow');
-                b.classList.remove('hidden');
-                if (onWarnYellow) b.addEventListener('click', onWarnYellow);
+            if (key === "warnYellow") {
+                const b = document.getElementById("btnWarnYellow");
+                b.classList.remove("hidden");
+                if (onWarnYellow) b.addEventListener("click", onWarnYellow);
             }
 
-            if (key === 'warnRed') {
-                const b = document.getElementById('btnWarnRed');
-                b.classList.remove('hidden');
-                if (onWarnRed) b.addEventListener('click', onWarnRed);
+            if (key === "warnRed") {
+                const b = document.getElementById("btnWarnRed");
+                b.classList.remove("hidden");
+                if (onWarnRed) b.addEventListener("click", onWarnRed);
             }
         });
 
-        document.getElementById('btnSuccess').addEventListener('click', closeModal);
+        document
+            .getElementById("btnSuccess")
+            .addEventListener("click", closeModal);
 
-        modal.classList.remove('hidden');
+        modal.classList.remove("hidden");
     };
 
     window.closeModal = function () {
-        modal.classList.add('hidden');
+        modal.classList.add("hidden");
     };
 
-    window.showLoadModal = function (titleText = 'Menyimpan Data...', messageText = 'Mohon tunggu sebentar...') {
-        document.getElementById('modalLoadTitle').textContent = titleText;
-        document.getElementById('modalLoadMessage').textContent = messageText;
-        modalLoad.classList.remove('hidden');
+    window.showLoadModal = function (
+        titleText = "Menyimpan Data...",
+        messageText = "Mohon tunggu sebentar..."
+    ) {
+        document.getElementById("modalLoadTitle").textContent = titleText;
+        document.getElementById("modalLoadMessage").textContent = messageText;
+        modalLoad.classList.remove("hidden");
     };
 
     window.hideLoadModal = function () {
-        modalLoad.classList.add('hidden');
+        modalLoad.classList.add("hidden");
     };
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
+    window.showResetModal = function (options = {}) {
+        modalReset.classList.remove("hidden");
+
+        const btnSimpan = document.getElementById("btnSimpan");
+        if (btnSimpan) {
+            btnSimpan.onclick = () => {
+                if (options.onConfirm) {
+                    options.onConfirm();
+                }
+            };
+        }
+
+        const btnKembali = document.getElementById("btnKembali");
+        if (btnKembali) {
+            btnKembali.onclick = () => {
+                hideConfirmModal();
+            };
+        }
+
+        const btnYakin = document.getElementById("btnYakin");
+        if (btnYakin) {
+            form.submit();
+        }
+    };
+
+    window.hideResetModal = function () {
+        modalReset.classList.add("hidden");
+    };
+
+    window.showConfirmModal = function () {
+        modalConfirm.classList.remove("hidden");
+
+        const btnSimpan = document.getElementById("btnSimpan");
+        if (btnSimpan) {
+            btnSimpan.onclick = () => {
+                form.submit();
+            };
+        }
+
+        const btnKembali = document.getElementById("btnBatalkan");
+        if (btnKembali) {
+            btnKembali.onclick = () => {
+                hideConfirmModal();
+            };
+        }
+    };
+
+    window.hideConfirmModal = function () {
+        modalConfirm.classList.add("hidden");
+    };
 })();

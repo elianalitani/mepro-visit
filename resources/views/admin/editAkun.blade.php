@@ -11,6 +11,7 @@
     <link href="https://unpkg.com/flowbite@latest/dist/flowbite.min.css" />
 </head>
 <body class="min-h-screen bg-[#E8F5EC] overflow-x-hidden">
+    @include('components.modal')
     <!--begin::Loading-->
     <div id="loadingOverlay" class="hidden fixed inset-0 flex z-99 w-screen justify-center items-center">
         @include('components.loading')
@@ -68,8 +69,9 @@
                         <div class="flex md:flex-col border border-gray-300 rounded-lg p-2.5">
                             <div class="flex flex-row gap-2">
                                 <div class="mb-5 w-full">
-                                    <label for="divisi" class="block mb-2 text-sm font-medium text-gray-900">Divisi</label>
-                                    <input type="text" id="divisi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value="Resepsionis" disabled />
+                                    <label for="namaKaryawan" class="block mb-2 text-sm font-medium text-gray-900">Nama Karyawan</label>
+                                    <input type="text" id="namaKaryawan" value="{{ $akun->karyawan->nama ?? '' }}" disabled
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"/>
                                 </div>
                                 <div class="mb-5 w-full">
                                     <label for="namaKaryawan" class="block mb-2 text-sm font-medium text-gray-900">Nama Karyawan</label>

@@ -5,8 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\Divisi;
+use App\Models\Karyawan;
 use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class AkunController extends Controller
 {
@@ -60,11 +67,14 @@ class AkunController extends Controller
 							<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
 						</svg>
 					</a>
-					<a id="reset-akun">
+					<a href="javascript:void(0)" 
+                        class="btn-reset-akun text-black-600"
+                        data-id="'.$row->id_user.'"
+                        data-email="'.($row->karyawan->email ?? '').'">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-                        </svg>                  
-					</a>
+                        </svg> 
+                    </a>
 					</div>';
 					})
             ->rawColumns(['nama_karyawan','role','created_at', 'updated_at', 'status', 'aksi'])
@@ -73,7 +83,9 @@ class AkunController extends Controller
     
     /* lihatAkun: melihat detail akun */
     public function lihatAkun($id_user){
-        $akun = User::where('id_user', $id_user)->firstOrFail();
+       $akun = User::with('karyawan') 
+                ->where('id_user', $id_user)
+                ->firstOrFail();
         // dd($akun->toArray());
         return view('admin.detailAkun', compact('akun'));
     }
@@ -85,11 +97,109 @@ class AkunController extends Controller
     
     /* tambahAkun: membuat akun baru */
     public function tambahAkun(){
-        return view('admin.formAkun');
+        // mengambil data karyawan dari database
+        $karyawan = Karyawan::whereIn('id_divisi', ['DV01', 'DV02'])->get();
+        // mengambil data divisi dari database
+        return view('admin.formAkun', compact('karyawan'));
+    }
+
+    public function simpanAkun(Request $request)
+    {
+        $request->validate([
+            'id_karyawan' => 'required|exists:karyawan_mt,nip',
+            'role' => 'required|string',
+            'username' => 'required|string|unique:user_tr,username',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $lastUser = User::orderBy('id_user', 'desc')->first();
+
+        if ($lastUser) {
+            $lastNumber = (int) substr($lastUser->id_user, 1);
+            $newId = 'U' . str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+        } else {
+            $newId = 'U001';
+        }
+
+        $karyawan = Karyawan::findOrFail($request->id_karyawan);
+
+        $user = new User();
+        $user->id_user     = $newId; 
+        $user->id_karyawan = $karyawan->nip;
+        $user->email       = $karyawan->email;
+        $user->role        = $request->role;
+        $user->username    = $request->username;
+        $user->password    = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('akun.index')
+                        ->with('success', 'Akun berhasil ditambahkan!');
     }
     
     /* editAkun: mengedit detail akun */
-    public function editAkun(){
-        return view('admin.editAkun');
+    public function editAkun($id_user){
+        $akun = User::with('karyawan')->where('id_user', $id_user)->firstOrFail();
+        return view('admin.editAkun', compact('akun'));
     }
+
+    public function updateAkun(Request $request, $id_user)
+    {
+        $akun = User::where('id_user', $id_user)->firstOrFail();
+
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'old_password' => 'required',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        if (!\Hash::check($request->old_password, $akun->password)) {
+            return back()->withErrors(['old_password' => 'Password lama tidak sesuai']);
+        }
+
+        $akun->username = $request->username;
+
+        if ($request->filled('password')) {
+            $akun->password = bcrypt($request->password);
+        }
+
+        $akun->save();
+
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil diupdate');
+    }
+
+    /* formAkun: untuk mengirim link reset password */
+    public function formReset($id_user) {
+        $akun = User::with('karyawan')->where('id_user', $id_user)->firstOrFail();
+        return response()->json($akun); 
+    }
+
+    /* kirimLinkReset: mengirim link reset password */
+    public function kirimLinkReset(Request $request, $id)
+    {
+        // Cari user (buat validasi saja, misal pastikan ID valid)
+        $user = User::findOrFail($id);
+
+        // Kirim link reset password ke email yang dimasukkan di form
+        $status = \Password::sendResetLink([
+            'email' => $request->email,
+        ]);
+
+        if ($status === \Password::RESET_LINK_SENT) {
+            // Update kolom status_reset di tabel user_tr
+            $user->update([
+                'status' => 'email reset berhasil dikirim'
+            ]);
+
+            return redirect()->back()->with(
+                'success',
+                'Link reset password berhasil dikirim ke ' . $request->email
+            );
+        }
+
+        return redirect()->back()->withErrors([
+            'email' => __($status)
+        ]);
+    }
+
+
 }

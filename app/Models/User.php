@@ -21,7 +21,9 @@ class User extends Authenticatable
         'password',
         'role',
         'id_karyawan',
-        'show_is'
+        'status',
+        'show_is',
+        'email'
     ];
 
     protected $hidden = [
@@ -45,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Karyawan::class, 'id_karyawan', 'nip');
     }
+
+        public function notifikasi()
+    {
+        return $this->hasMany(Notifikasi::class, 'created_by', 'id_user');
+}
 }

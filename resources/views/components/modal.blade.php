@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div id="modalMain" class="fixed inset-0 z-50 flex justify-center items-center bg-black/50">
+<div id="modalMain" class="hidden inset-0 z-50 flex justify-center items-center bg-black/50">
     <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
         
         <div id="modalMainIcon" class="flex m-4 justify-center items-center">
@@ -49,4 +49,29 @@
         <h2 id="modalLoadTitle" class="mb-2 text-2xl text-gray-800 text-center font-bold">Menyimpan Data...</h2>
         <p id="modalLoadMessage" class="mb-4 text-lg text-gray-600 text-center">Mohon tunggu sebentar, sistem sedang menyimpan data Anda.</p>
     </div>
+</div>
+
+<!-- Modal Reset -->
+<div id="resetModal" class="hidden fixed inset-0 z-50 flex justify-center items-center bg-black/50">
+  <div class="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg relative text-center">
+    
+    <h2 class="mb-4 text-xl font-bold">Apakah Anda yakin ingin mereset akun ini?</h2>
+    <p class="mb-6 text-gray-700">
+      Jika ya, sistem akan mengirimkan email reset ke 
+      <span id="resetEmailText" class="text-blue-600 font-medium underline"></span>
+    </p>
+
+    <form id="resetForm" action="" method="POST" class="flex justify-center gap-3">
+      @csrf
+      <input type="hidden" name="id_user" id="resetUserId">
+      <input type="hidden" name="email" id="resetEmailInput">
+
+      <button type="button" id="btnResetBatal" class="px-4 py-2 bg-gray-300 rounded">
+        Batalkan
+      </button>
+      <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded font-semibold">
+        Kirim Email
+      </button>
+    </form>
+  </div>
 </div>

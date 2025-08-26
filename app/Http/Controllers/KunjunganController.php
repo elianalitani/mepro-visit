@@ -284,4 +284,11 @@ class KunjunganController extends Controller
 
         return redirect()->route('kunjungan.index')->with('success', 'Berhasil membatalkan kunjungan.');
     }
+
+    public function searchKaryawan(Request $request)
+    {
+        $keyword = $request->keyword;
+        $result = Karyawan::where('nama', 'like', "%{$keyword}%")->get();
+        return response()->json($result);
+    }
 }

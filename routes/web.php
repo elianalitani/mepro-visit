@@ -80,6 +80,7 @@ Route::get('/kunjungan/{id_kunjungan}/edit', [KunjunganController::class, 'editK
 Route::put('/kunjungan/{id_kunjungan}', [KunjunganController::class, 'updateKunjungan'])->name('kunjungan.update');
 
 Route::patch('/kunjungan/{id_kunjungan}/batal', [KunjunganController::class, 'batalKunjungan'])->name('kunjungan.batal');
+Route::get('/search-karyawan', [KunjunganController::class, 'searchKaryawan']);
 
 /* Route untuk akun */
 Route::get('/akun/load', [AkunController::class, 'loadAkunTable'])->name('akun.load');

@@ -124,26 +124,24 @@
 
                             <!--begin::Dropdown menu -->
                             <div id="dropdownTujuan"
-                                class="z-10 hidden w-70 bg-white border border-gray-200 rounded-lg shadow-md">
+                                class="z-10 hidden w-59 bg-white border border-gray-200 rounded-lg shadow-md">
                                 
                                 <!-- Search input -->
-                                <div class="p-2">
-                                    <input type="text" id="dropdownSearch" placeholder="Cari pihak tujuan..."
-                                        class="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500"/>
+                               <div class="p-2">
+                                        <input type="text" id="searchKaryawan" placeholder="Cari Karyawan..."
+                                            class="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500"/>
                                 </div>
-                                
-                                <!-- List items -->
-                                <ul class="max-h-60 overflow-y-auto py-2 text-sm">
-                                    @foreach ($karyawan as $k)
-                                    <li>
-                                        <a href="#"
-                                        class="block px-4 py-2 hover:bg-[#eefbe8] cursor-pointer"
-                                        onclick="event.preventDefault(); pilihKaryawan('{{ $k->nip }}', '{{ $k->nama }}', '{{ $k->id_divisi }}')">
-                                            {{ $k->nama ?? '-' }}
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                </ul>
+                                    <ul id="dropdownList" class="py-2 text-sm max-h-60 overflow-y-auto" aria-labelledby="dropdownDefaultButton">
+                                        @foreach($karyawan as $k)
+                                        <li class="karyawan-item">
+                                            <a href="#" 
+                                            class="block px-4 py-2 hover:bg-[#eefbe8]" 
+                                            onclick="event.preventDefault(); pilihKaryawan('{{ $k->nip }}', '{{ $k->nama }}', '{{ $k->id_divisi }}')">
+                                                {{ $k->nama ?? '-' }}
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
                                 
                                 <input type="hidden" name="id_karyawan" id="id_karyawan" required>
                             </div>
@@ -295,6 +293,16 @@
             document.getElementById('id_divisi').value = id; 
             document.getElementById('selectedDivisi').textContent = nama;
         }
+
+        document.getElementById("searchKaryawan").addEventListener("keyup", function() {
+            let filter = this.value.toLowerCase();
+            let list = document.querySelectorAll("#dropdownList li.karyawan-item");
+
+            list.forEach(item => {
+                let text = item.textContent.toLowerCase();
+                item.style.display = text.includes(filter) ? "" : "none";
+            });
+        });
     </script>
 </body>
 </html>

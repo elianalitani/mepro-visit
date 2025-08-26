@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
             $this->string('modified_by', 12)->nullable();
         });
 
-        View::composer('components.notifications', function ($view) {
+        View::composer('*', function ($view) {
             $user = Auth::user();
 
             $query = Notifikasi::with('kunjungan')->orderBy('waktu_notifikasi', 'desc');
@@ -44,10 +44,8 @@ class AppServiceProvider extends ServiceProvider
                 });
             }
 
-            // ambil data notifikasi
             $notifikasi = $query->get();
-
-            // peta ikon per status
+            
             $iconMap = [
                 'Menunggu' => [
                     'svg'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fad230" class="p-1 bg-[#fbfbe8] rounded-full size-8"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" /></svg>',
@@ -80,7 +78,6 @@ class AppServiceProvider extends ServiceProvider
             $notifikasi->transform(function ($item) use ($iconMap) {
                 $status = $item->kunjungan->status ?? null;
                 $item->icon = $status && isset($iconMap[$status]) ? $iconMap[$status] : null;
-                $item->dibaca = !$item->dibaca; // atau $n->read_at === null kalau pakai timestamp
                 return $item;
 
                 

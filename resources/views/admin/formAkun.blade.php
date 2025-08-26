@@ -71,44 +71,71 @@
                             <!--begin::Nama karyawan-->
                             <div class="mb-5 w-full">
                                 <label for="namaKaryawan" class="block mb-2 text-sm text-gray-900 font-medium">
-                                    Nama Karyawan <span class="text-xs text-[#e21b1b]">*</span></label>                              
+                                    Nama Karyawan <span class="text-xs text-[#e21b1b]">*</span></label>                             
                                 <!--begin::Dropdown-->
-                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownNamaK" class="flex w-full p-2.5 justify-between items-center border border-gray-300 rounded-lg text-sm text-gray-900" type="button">
-                                    Pilih nama karyawan    
+                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownNamaK" 
+                                    class="flex w-full p-2.5 justify-between items-center border border-gray-300 rounded-lg text-sm text-gray-900" 
+                                    type="button">
+                                    <span id="selectedKaryawan">Pilih nama karyawan</span>   
                                     <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                     </svg>
                                 </button>
 
-                                    <!--begin::Dropdown menu -->
-                                    <div id="dropdownNamaK" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm">
-                                        <ul class="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
-                                            <li>
-                                                <a class="block px-4 py-2 hover:bg-[#eefbe8]">Pilih nama karyawan</a>
-                                            </li>
-                                        </ul>
+                               <!--begin::Dropdown menu -->
+                                <div id="dropdownNamaK" class="z-10 hidden w-152 bg-white border border-gray-200 rounded-lg shadow-md">
+                                    <div class="p-2">
+                                        <input type="text" id="searchKaryawan" placeholder="Cari Karyawan..."
+                                            class="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500"/>
                                     </div>
-                                    <!--end::Dropdown menu-->  
-                                <!--end::Dropdown-->                              
-                        </div>
-                        <!--end::Nama karyawan-->
+                                    <ul id="dropdownList" class="py-2 text-sm max-h-60 overflow-y-auto" aria-labelledby="dropdownDefaultButton">
+                                        @foreach($karyawan as $k)
+                                        <li class="karyawan-item">
+                                            <a href="#" 
+                                            class="block px-4 py-2 hover:bg-[#eefbe8]" 
+                                            onclick="event.preventDefault(); pilihKaryawan('{{ $k->nip }}', '{{ $k->nama }}', '{{ $k->id_divisi }}')">
+                                                {{ $k->nama ?? '-' }}
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <!--end::Dropdown menu-->
+  
+
+                                <!-- hidden input untuk simpan nip karyawan -->
+                                <input type="hidden" name="id_karyawan" id="karyawan_id" required>
+                            </div>
+                            <!--end::Nama karyawan-->
                         
-                        <!--begin::Divisi karyawan-->
-                        <div class="mb-5 w-full">
-                            <label for="divisiKaryawan" class="block mb-2 text-sm text-gray-900 font-medium">Divisi <span class="text-xs text-[#e21b1b]">*</span></label>
-                            <!--begin::Dropdown-->
-                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdownDivisiK" class="flex w-full p-2.5 justify-between items-center border border-gray-300 rounded-lg text-sm text-gray-900" type="button">
-                                    Pilih divisi    
-                                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            <!--begin::Role-->
+                            <div class="mb-5 w-full">
+                                <label for="role" class="block mb-2 text-sm text-gray-900 font-medium">
+                                    Role <span class="text-xs text-[#e21b1b]">*</span>
+                                </label>
+                                <!--begin::Dropdown-->
+                                <button id="dropdownRoleBtn" data-dropdown-toggle="dropdownRoleK"
+                                    class="flex w-full p-2.5 justify-between items-center border border-gray-300 rounded-lg text-sm text-gray-900"
+                                    type="button">
+                                    <span id="selectedRole">Pilih Role</span>
+                                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="m1 1 4 4 4-4" />
                                     </svg>
                                 </button>
-                            
+
                                 <!--begin::Dropdown menu -->
-                                <div id="dropdownDivisiK" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm">
-                                    <ul class="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
+                                <div id="dropdownRoleK"
+                                    class="z-10 hidden w-152 bg-white border border-gray-200 rounded-lg shadow-md">
+                                    <ul class="py-2 text-sm" aria-labelledby="dropdownRoleBtn">
                                         <li>
-                                            <a class="block px-4 py-2 hover:bg-[#eefbe8]">Pilih divisi</a>
+                                            <button type="button" data-value="Satpam"
+                                                class="role-option w-full text-left px-4 py-2 hover:bg-[#eefbe8]">Satpam</button>
+                                        </li>
+                                        <li>
+                                            <button type="button" data-value="Resepsionis"
+                                                class="role-option w-full text-left px-4 py-2 hover:bg-[#eefbe8]">Resepsionis</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -169,12 +196,11 @@
                             <!--end::Konfirmasi password-->
                             
                             <div class="flex text-sm w-full justify-end items-end gap-2">
-                                <button type="button" id="btnBuatAkun" class="p-2.5 px-7 rounded-lg bg-[#029C55] justify-center items-center text-white">Simpan</button>
+                                <button type="submit" id="btnBuatAkun" class="p-2.5 px-7 rounded-lg bg-[#029C55] justify-center items-center text-white">Simpan</button>
                                 <a href="{{ route('akun.index') }}" class="p-2.5 px-7 rounded-lg bg-gray-50 border border-gray-300">Batal</a>
                             </div>
                            
                         </div>
-                    </form> 
                     <!--end::Form kiri-->                          
                     <!--begin::Form kanan-->
                     <div class="flex flex-col h-full gap-4 p-4 mt-6 justify-center items-center">
@@ -218,6 +244,33 @@
             el.classList.toggle('block');
         });
     });
+
+    // fungsi pilih karyawan tetap
+    function pilihKaryawan(nip, nama, id_divisi) {
+        document.getElementById('karyawan_id').value = nip; 
+        document.getElementById('selectedKaryawan').textContent = nama;
+    }
+
+    // search filter client-side
+    document.getElementById("searchKaryawan").addEventListener("keyup", function() {
+        let filter = this.value.toLowerCase();
+        let list = document.querySelectorAll("#dropdownList li.karyawan-item");
+
+        list.forEach(item => {
+            let text = item.textContent.toLowerCase();
+            item.style.display = text.includes(filter) ? "" : "none";
+        });
+    });
+
+    document.querySelectorAll('.role-option').forEach(item => {
+        item.addEventListener('click', function () {
+            const value = this.getAttribute('data-value');
+            document.getElementById('selectedRole').innerText = value;
+            document.getElementById('roleInput').value = value;
+        });
+    });
+
+
 </script>
 @vite(['resources/js/modal.js', 'resources/js/buatAkun.js'])
 </body>

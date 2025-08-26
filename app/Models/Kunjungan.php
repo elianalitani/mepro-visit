@@ -46,4 +46,34 @@ class Kunjungan extends Model
     {
         return $this->belongsTo(User::class, 'id_user_resepsionis', 'id_user');
     }
+
+    protected static function booted()
+    {
+        // Event create
+        static::created(function ($kunjungan) {
+            Notifikasi::create([
+                'id_notifikasi' => str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT) . now()->format('Ymd'),
+                'id_kunjungan' => $kunjungan->id_kunjungan,
+                'dibaca' => false,
+                'is_deleted' => false,
+                'waktu_notifikasi' => now(),
+                'created_by' => auth()->user()->id_user ?? 'SYSTEM',
+                'modified_by' => auth()->user()->id_user ?? 'SYSTEM',
+            ]);
+        });
+
+        // Event update
+        static::updated(function ($kunjungan) {
+            Notifikasi::create([
+                'id_notifikasi' => str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT) . now()->format('Ymd'),
+                'id_kunjungan' => $kunjungan->id_kunjungan,
+                'dibaca' => false,
+                'is_deleted' => false,
+                'waktu_notifikasi' => now(),
+                'created_by' => auth()->user()->id_user ?? 'SYSTEM',
+                'modified_by' => auth()->user()->id_user ?? 'SYSTEM',
+            ]);
+        });
+    }
+
 }

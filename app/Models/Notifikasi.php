@@ -7,16 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Notifikasi extends Model
 {
     protected $table = 'notifikasi_tr';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_notifikasi';
     public $incrementing = false;
     protected $keyType = 'string';
     
     protected $fillable = [
         'id',
+        'id_notifikasi',
         'dibaca',
         'waktu_notifikasi',
+        'id_kunjungan',
+        'is_deleted',
+        'created_at',
+        'updated_at',
         'create_by',
-        'id_kunjungan'
+        'modified_by'
     ];
 
     protected $hidden = [

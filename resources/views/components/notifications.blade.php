@@ -9,7 +9,11 @@
     <!--begin::Content-->
     <div class="bg-white items-center max-h-64 overflow-y-auto">     
         @forelse($notifikasi as $item)
-            <div class="flex flex-col gap-3 p-4 border border-[#2d2d2b25]" >
+            <a href="{{ route('kunjungan.lihatKunjungan', $item->kunjungan->id_kunjungan) }}" 
+            class="block flex flex-col gap-3 p-4 border border-[#2d2d2b25] 
+                    {{ $item->dibaca ? 'bg-white' : 'bg-[#B9E4D0]' }} 
+                    hover:bg-gray-100 transition">
+                
                 <div class="flex flex-row gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" 
                         viewBox="0 0 24 24" 
@@ -22,6 +26,7 @@
                         {{ $item->kunjungan->status ?? '-' }}
                     </span>
                 </div>
+                
                 <div class="flex flex-col text-sm justify-between">
                     <span class="font-bold">
                         {{ $item->kunjungan->nama_tamu ?? 'Nama tidak ada' }} - 
@@ -30,7 +35,7 @@
                     <span>Tujuan : {{ $item->kunjungan->karyawan->nama ?? '-' }}</span>
                     <span>Divisi : {{ $item->kunjungan->karyawan->divisi->nama_divisi ?? '-' }}</span>
                 </div>
-            </div>
+            </a>
         @empty
             <div class="p-4 text-center text-gray-500 text-sm">
                 Tidak ada notifikasi

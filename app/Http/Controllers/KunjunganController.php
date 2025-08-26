@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kunjungan;
 use App\Models\Karyawan;
+use App\Models\Notifikasi;
 use App\Models\Divisi;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
@@ -260,6 +261,7 @@ class KunjunganController extends Controller
 
     public function lihatKunjungan($id_kunjungan){
         $kunjungan = Kunjungan::with(['karyawan.divisi', 'satpam.karyawan', 'resepsionis.karyawan'])->findOrFail($id_kunjungan);
+        Notifikasi::where('id_kunjungan', $id_kunjungan)->update(['dibaca' => true]);
         // dd($kunjungan->toArray());
         return view('detailKunjungan', compact('kunjungan'));
     }

@@ -166,7 +166,7 @@
 
                             <!--begin::Dropdown menu -->
                             <div id="dropdownDivisi"
-                                class="z-10 hidden w-70 bg-white border border-gray-200 rounded-lg shadow-md">
+                                class="z-10 hidden w-59 bg-white border border-gray-200 rounded-lg shadow-md">
                                 
                                 <!-- Search input -->
                                 <div class="p-2">

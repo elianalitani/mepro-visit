@@ -153,47 +153,58 @@
                             </div>
                             <!--end::Username-->
                             
-                            <!--begin::Password-->
+                            <!-- Password -->
                             <div class="mb-5 w-full">
-                                <label for="password" class="block mb-2 text-sm text-gray-900 font-medium">Password <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <div class="relative">
-                                    <input id="password hs-toggle-password" name="password" type="password" class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Password minimal 8 karakter"">
-                                    <button type="button" data-hs-toggle-password='{
-                                        "target": "#hs-toggle-password"
-                                    }' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
-                                        <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
-                                            <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
-                                            <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
-                                            <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
-                                            <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                                            <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
-                                        </svg>
-                                    </button>
-                                </div>
+                                <label for="password" class="block mb-2 text-sm text-gray-900 font-medium">
+                                    Password <span class="text-xs text-[#e21b1b]">*</span>
+                                </label>
+                            <div class="relative">
+                                <input id="password" name="password" type="password"
+                                    class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900"
+                                    placeholder="Password minimal 8 karakter">
+                                <button type="button"
+                                        class="toggle-pass absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none">
+                                <!-- ikonmu tetap; pakai dua state path seperti semula -->
+                                <svg class="shrink-0 size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <!-- state: tersembunyi (ikon mata tertutup) -->
+                                    <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                                    <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                                    <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                                    <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                                    <!-- state: terlihat (ikon mata terbuka) -->
+                                    <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                    <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                </button>
                             </div>
-                            <!--end::Password-->
-                            
-                            <!--begin::Konfirmasi password-->
+                            </div>
+
+                            <!-- Konfirmasi Password -->
                             <div class="mb-5 w-full">
-                                <label for="confirmPassword" class="block mb-2 text-sm text-gray-900 font-medium">Konfirmasi Password <span class="text-xs text-[#e21b1b]">*</span></label>
-                                <div class="relative">
-                                    <input id="confirmPassword hs-toggle-password" type="password" name="password_confirmation"  class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900" placeholder="Password minimal 8 karakter"">
-                                    <button type="button" data-hs-toggle-password='{
-                                        "target": "#hs-toggle-password"
-                                    }' class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
-                                        <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
-                                            <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
-                                            <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
-                                            <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
-                                            <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                                            <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
-                                        </svg>
-                                    </button>
-                                </div>
+                            <label for="confirmPassword" class="block mb-2 text-sm text-gray-900 font-medium">
+                                Konfirmasi Password <span class="text-xs text-[#e21b1b]">*</span>
+                            </label>
+                            <div class="relative">
+                                <input id="confirmPassword" name="password_confirmation" type="password"
+                                    class="block w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm text-gray-900"
+                                    placeholder="Password minimal 8 karakter">
+                                <button type="button"
+                                        class="toggle-pass absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none">
+                                <!-- ikon sama seperti di atas -->
+                                <svg class="shrink-0 size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                                    <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                                    <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                                    <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                                    <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                    <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                </button>
                             </div>
-                            <!--end::Konfirmasi password-->
+                            </div>
+
                             
                             <div class="flex text-sm w-full justify-end items-end gap-2">
                                 <button type="submit" id="btnBuatAkun" class="p-2.5 px-7 rounded-lg bg-[#029C55] justify-center items-center text-white">Simpan</button>
@@ -204,7 +215,7 @@
                     <!--end::Form kiri-->                          
                     <!--begin::Form kanan-->
                     <div class="flex flex-col h-full gap-4 p-4 mt-6 justify-center items-center">
-                        <img src="\assets\images\replace-later.svg" class="w-auto h-64">
+                        <img src="{{ asset('assets/images/admin.png') }}" class="w-auto h-64">
                         <span class="text-xl text-left font-bold ">Tips Pengisian Form</span>
                         <p class="text-sm text-left font-bold ">
                             1. Pilih nama karyawan terlebih dahulu<br>
@@ -221,7 +232,23 @@
         </div>
     </div>
 
-<script>   
+<script>
+    document.querySelectorAll('button.toggle-pass').forEach(btn => {
+            // input target = input sebelumnya di container yang sama
+            const wrapper = btn.closest('.relative');
+            const input = wrapper ? wrapper.querySelector('input[type="password"], input[type="text"]') : null;
+            if (!input) return;
+
+            btn.addEventListener('click', () => {
+            input.type = (input.type === 'password') ? 'text' : 'password';
+
+            // toggle ikon (pakai kelas yang sudah ada di SVG-mu)
+            btn.querySelectorAll('.hs-password-active\\:hidden, .hs-password-active\\:block').forEach(el => {
+                el.classList.toggle('hidden');
+                el.classList.toggle('block');
+            });
+            });
+        });
     document.addEventListener("DOMContentLoaded", function(){
         document.querySelectorAll("a").forEach(function (link){
             link.addEventListener("click", function(e){
